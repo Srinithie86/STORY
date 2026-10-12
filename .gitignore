@@ -48,3 +48,5 @@ app.*.map.json
 .widget_preview/
 raw_media_backup/
 .wrangler/
+
+/build/web/
