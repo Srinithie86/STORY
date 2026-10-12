@@ -123,6 +123,9 @@
       }
     }
 
+    // Unconditional safety timeout: guarantees loading screen fades out in <1.8s
+    setTimeout(hideLoader, 1800);
+
     // 1. Flutter first frame event
     window.addEventListener('flutter-first-frame', hideLoader);
 
@@ -135,9 +138,9 @@
     });
     domObserver.observe(document.body, { childList: true, subtree: true });
 
-    // 3. Fallback: never block screen for more than 1.2s on reload
+    // 3. Fallback: on window load
     window.addEventListener('load', function () {
-      setTimeout(hideLoader, 800);
+      setTimeout(hideLoader, 500);
     });
   </script>
 
