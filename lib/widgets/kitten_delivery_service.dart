@@ -116,10 +116,10 @@ class _KittenDeliveryServiceState extends State<KittenDeliveryService>
       vsync: this,
       duration: const Duration(milliseconds: 550),
     );
-    _stampScaleAnimation = TweenSequence<double>([
-      TweenSequenceItem(tween: Tween<double>(begin: 2.2, end: 0.95), weight: 70),
-      TweenSequenceItem(tween: Tween<double>(begin: 0.95, end: 1.0), weight: 30),
-    ]).animate(CurvedAnimation(
+    _stampScaleAnimation = Tween<double>(
+      begin: 2.2,
+      end: 1.0,
+    ).animate(CurvedAnimation(
       parent: _stampController,
       curve: Curves.easeOutBack,
     ));
