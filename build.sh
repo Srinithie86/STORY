@@ -43,13 +43,9 @@ flutter pub get
 echo "--- Building Web Release ---"
 flutter build web --release
 
-# 5. Ensure SPA redirects and 404 handler exist in output directory
-if [ -f "web/_redirects" ] && [ ! -f "build/web/_redirects" ]; then
+# 5. Ensure SPA redirects exist in output directory
+if [ -f "web/_redirects" ]; then
   cp web/_redirects build/web/_redirects
-fi
-
-if [ -f "web/404.html" ] && [ ! -f "build/web/404.html" ]; then
-  cp web/404.html build/web/404.html
 fi
 
 # 6. Verify output
