@@ -5,6 +5,11 @@ import 'package:our_love_story/widgets/love_letter.dart';
 import 'package:our_love_story/widgets/who_is_he_movie_credits.dart';
 import 'package:our_love_story/widgets/birthday_car_track.dart';
 import 'package:our_love_story/widgets/congratulation_card.dart';
+import 'package:our_love_story/widgets/fight_and_love_pledge.dart';
+import 'package:our_love_story/widgets/romantic_flower_greeting_card.dart';
+import 'package:our_love_story/widgets/forever_archive.dart';
+import 'package:our_love_story/widgets/boyfriend_birthday_calendar_hero.dart';
+import 'package:our_love_story/widgets/final_reveal.dart';
 
 void main() {
   testWidgets('KittenDeliveryService renders and interacts cleanly', (WidgetTester tester) async {
@@ -175,4 +180,192 @@ void main() {
     // Back to question
     expect(find.text('Happy birthday, love!'), findsOneWidget);
   });
+
+  testWidgets('FightAndLovePledgeSection renders fights and pledges cleanly', (WidgetTester tester) async {
+    tester.view.physicalSize = const Size(1200, 1000);
+    tester.view.devicePixelRatio = 1.0;
+    addTearDown(tester.view.resetPhysicalSize);
+
+    await tester.pumpWidget(
+      const MaterialApp(
+        home: Scaffold(
+          body: SingleChildScrollView(
+            child: FightAndLovePledgeSection(),
+          ),
+        ),
+      ),
+    );
+
+    // Verify header
+    expect(find.textContaining('10,000+ SILLY FIGHTS'), findsOneWidget);
+    expect(find.text('“I want to daily fight with you, for the rest of my life!” ♡'), findsOneWidget);
+
+    // Tap on first fight reason to expand
+    final reasonFinder = find.textContaining('The 3-Minute Crisis');
+    await tester.ensureVisible(reasonFinder);
+    await tester.tap(reasonFinder);
+    await tester.pump(const Duration(milliseconds: 500));
+
+    // Verify expanded details
+    expect(find.textContaining('fake breakup #482'), findsOneWidget);
+
+    // Verify Life Contract & Promises section
+    expect(find.textContaining('L I F E   C O N T R A C T'), findsOneWidget);
+  });
+
+  testWidgets('RomanticFlowerGreetingCard renders bouquet and allows card flipping', (WidgetTester tester) async {
+    tester.view.physicalSize = const Size(1200, 1000);
+    tester.view.devicePixelRatio = 1.0;
+    addTearDown(tester.view.resetPhysicalSize);
+
+    await tester.pumpWidget(
+      const MaterialApp(
+        home: Scaffold(
+          body: SingleChildScrollView(
+            child: RomanticFlowerGreetingCard(),
+          ),
+        ),
+      ),
+    );
+
+    // Wait for entrance animation
+    await tester.pump(const Duration(milliseconds: 1200));
+
+    // Verify initial closed card hint & replay
+    expect(find.text('Tap card to open message ♡'), findsOneWidget);
+    expect(find.text('Replay'), findsOneWidget);
+
+    // Tap to open card
+    final cardHint = find.text('Tap card to open message ♡');
+    await tester.ensureVisible(cardHint);
+    await tester.tap(cardHint);
+    await tester.pump(const Duration(milliseconds: 800));
+
+    // Verify opened card state
+    expect(find.text('Tap to close card'), findsOneWidget);
+  });
+
+  testWidgets('InteractiveCakeCuttingWidget allows candle blowing and slice cutting', (WidgetTester tester) async {
+    tester.view.physicalSize = const Size(1200, 1000);
+    tester.view.devicePixelRatio = 1.0;
+    addTearDown(tester.view.resetPhysicalSize);
+
+    await tester.pumpWidget(
+      const MaterialApp(
+        home: Scaffold(
+          body: SingleChildScrollView(
+            child: InteractiveCakeCuttingWidget(),
+          ),
+        ),
+      ),
+    );
+
+    // Verify title and actions
+    expect(find.text('“Make a Wish & Cut the First Slice”'), findsOneWidget);
+    expect(find.text('BLOW CANDLES 💨'), findsOneWidget);
+    expect(find.text('CUT FIRST SLICE 🎂'), findsOneWidget);
+
+    // Blow candles
+    final blowBtn = find.text('BLOW CANDLES 💨');
+    await tester.ensureVisible(blowBtn);
+    await tester.tap(blowBtn);
+    await tester.pump(const Duration(milliseconds: 700));
+
+    // Candles blown state
+    expect(find.text('RELIGHT CANDLES 🔥'), findsOneWidget);
+
+    // Cut cake slice
+    final cutBtn = find.text('CUT FIRST SLICE 🎂');
+    await tester.ensureVisible(cutBtn);
+    await tester.tap(cutBtn);
+    await tester.pump(const Duration(milliseconds: 900));
+
+    // Celebration message revealed in-place without modal covering cake
+    expect(find.text('🎉 🎂 🎉'), findsOneWidget);
+    expect(find.text('REPLAY SLICE 🍰'), findsOneWidget);
+
+    // Drain SnackBar & celebration timers
+    await tester.pump(const Duration(seconds: 3));
+  });
+
+  testWidgets('BoyfriendBirthdayCalendarHero navigates months and displays memories', (WidgetTester tester) async {
+    tester.view.physicalSize = const Size(1200, 1000);
+    tester.view.devicePixelRatio = 1.0;
+    addTearDown(tester.view.resetPhysicalSize);
+
+    await tester.pumpWidget(
+      const MaterialApp(
+        home: Scaffold(
+          body: SingleChildScrollView(
+            child: BoyfriendBirthdayCalendarHero(),
+          ),
+        ),
+      ),
+    );
+
+    // Initial Month: October 2026
+    expect(find.text('~ October ~'), findsOneWidget);
+    expect(find.text('2026'), findsOneWidget);
+    expect(find.text("OCTOBER 13 · SELVAKUMAR'S 24TH BIRTHDAY"), findsOneWidget);
+
+    // Navigate to previous month
+    final prevBtn = find.byTooltip('Previous Month');
+    await tester.ensureVisible(prevBtn);
+    await tester.tap(prevBtn);
+    await tester.pump(const Duration(milliseconds: 400));
+
+    // September 2026
+    expect(find.text('~ September ~'), findsOneWidget);
+    expect(find.text('Jump to Oct 13 Birthday'), findsOneWidget);
+
+    // Jump back to Oct 13 Birthday
+    final jumpBtn = find.text('Jump to Oct 13 Birthday');
+    await tester.tap(jumpBtn);
+    await tester.pump(const Duration(milliseconds: 400));
+
+    expect(find.text('~ October ~'), findsOneWidget);
+
+    // Drain floating kisses timer
+    await tester.pump(const Duration(seconds: 2));
+  });
+
+  testWidgets('FinalRevealSection renders diploma, cinematic movie end card and replays story', (WidgetTester tester) async {
+    tester.view.physicalSize = const Size(1200, 1000);
+    tester.view.devicePixelRatio = 1.0;
+    addTearDown(tester.view.resetPhysicalSize);
+
+    bool replayFired = false;
+
+    await tester.pumpWidget(
+      MaterialApp(
+        home: Scaffold(
+          body: SingleChildScrollView(
+            child: FinalRevealSection(
+              onReplayStory: () {
+                replayFired = true;
+              },
+            ),
+          ),
+        ),
+      ),
+    );
+
+    // Verify diploma certificate
+    expect(find.text('BEST BOYFRIEND'), findsOneWidget);
+    expect(find.text('IN THE WORLD'), findsOneWidget);
+
+    // Verify cinematic movie end card
+    expect(find.text('THE FINAL SCENE · A LIFETIME PRODUCTION'), findsOneWidget);
+    expect(find.text('~ The End ~'), findsOneWidget);
+    expect(find.text('REPLAY OUR STORY ↺'), findsOneWidget);
+
+    // Tap Replay button
+    final replayBtn = find.text('REPLAY OUR STORY ↺');
+    await tester.ensureVisible(replayBtn);
+    await tester.tap(replayBtn);
+    await tester.pump(const Duration(milliseconds: 200));
+
+    expect(replayFired, isTrue);
+  });
 }
+

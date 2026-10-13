@@ -233,6 +233,8 @@ class _InteractiveCakeCuttingWidgetState
 
   late AnimationController _sliceController;
   late Animation<double> _sliceAnimation;
+  late AnimationController _extinguishController;
+  late Animation<double> _extinguishAnimation;
   late AnimationController _flickerController;
   late AnimationController _knifeHoverController;
 
@@ -253,6 +255,16 @@ class _InteractiveCakeCuttingWidgetState
       curve: Curves.easeOutBack,
     );
 
+    _extinguishController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 600),
+    );
+
+    _extinguishAnimation = CurvedAnimation(
+      parent: _extinguishController,
+      curve: Curves.easeOut,
+    );
+
     _flickerController = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 700),
@@ -267,6 +279,7 @@ class _InteractiveCakeCuttingWidgetState
   @override
   void dispose() {
     _sliceController.dispose();
+    _extinguishController.dispose();
     _flickerController.dispose();
     _knifeHoverController.dispose();
     super.dispose();
@@ -296,10 +309,12 @@ class _InteractiveCakeCuttingWidgetState
   }
 
   void _blowCandles() {
+    if (_sliceController.isAnimating) return;
     setState(() {
       _candlesBlown = !_candlesBlown;
     });
     if (_candlesBlown) {
+      _extinguishController.forward();
       _spawnConfetti();
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
@@ -310,16 +325,19 @@ class _InteractiveCakeCuttingWidgetState
               color: Colors.white,
             ),
           ),
-          backgroundColor: const Color(0xFF8B1220),
+          backgroundColor: const Color(0xFF722F37),
           duration: const Duration(milliseconds: 1800),
           behavior: SnackBarBehavior.floating,
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
         ),
       );
+    } else {
+      _extinguishController.reverse();
     }
   }
 
   void _cutCake() {
+    if (_sliceController.isAnimating) return;
     if (_isCut) {
       _resetCake();
       return;
@@ -328,264 +346,166 @@ class _InteractiveCakeCuttingWidgetState
       _isCut = true;
     });
     _spawnConfetti();
-    _sliceController.forward().then((_) {
-      _showHappyBirthdayPopup();
-    });
+    _sliceController.forward();
   }
 
   void _resetCake() {
+    if (_sliceController.isAnimating) return;
     _sliceController.reverse().then((_) {
-      setState(() {
-        _isCut = false;
-      });
+      if (mounted) {
+        setState(() {
+          _isCut = false;
+        });
+      }
     });
   }
 
-  void _showHappyBirthdayPopup() {
-    showDialog(
-      context: context,
-      barrierDismissible: true,
-      builder: (context) {
-        return Dialog(
-          backgroundColor: Colors.transparent,
-          insetPadding: const EdgeInsets.all(20),
-          child: Container(
-            constraints: const BoxConstraints(maxWidth: 460),
-            padding: const EdgeInsets.symmetric(horizontal: 28, vertical: 32),
-            decoration: BoxDecoration(
-              color: const Color(0xFFFFFDF9), // Luxury warm parchment paper
-              borderRadius: BorderRadius.circular(24),
-              border: Border.all(color: const Color(0xFFD4AF37), width: 2.0),
-              boxShadow: [
-                BoxShadow(
-                  color: const Color(0xFF8B1220).withValues(alpha: 0.25),
-                  blurRadius: 36,
-                  offset: const Offset(0, 14),
-                ),
-              ],
-            ),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                const Text("🎉 🎂 🎉", style: TextStyle(fontSize: 34)),
-                const SizedBox(height: 12),
-                Text(
-                  "HAPPY BIRTHDAY, MY SOULMATE!",
-                  textAlign: TextAlign.center,
-                  style: GoogleFonts.cinzel(
-                    fontSize: 24,
-                    fontWeight: FontWeight.w900,
-                    letterSpacing: 2.0,
-                    color: const Color(0xFF8B1220),
-                  ),
-                ),
-                const SizedBox(height: 8),
-                Text(
-                  "You cut the ceremonial first slice of our 2026 Birthday Cake! 🍰",
-                  textAlign: TextAlign.center,
-                  style: GoogleFonts.caveat(
-                    fontSize: 22,
-                    color: const Color(0xFF2C1820),
-                    fontWeight: FontWeight.w700,
-                  ),
-                ),
-                const SizedBox(height: 14),
-                Text(
-                  "“May every year we celebrate together be even sweeter than the last. You are my greatest joy, my best friend, and the love of my entire life.”",
-                  textAlign: TextAlign.center,
-                  style: GoogleFonts.cormorantGaramond(
-                    fontSize: 18,
-                    fontStyle: FontStyle.italic,
-                    fontWeight: FontWeight.w600,
-                    color: const Color(0xFF4A342B),
-                    height: 1.4,
-                  ),
-                ),
-                const SizedBox(height: 26),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    OutlinedButton(
-                      onPressed: () {
-                        Navigator.of(context).pop();
-                        _resetCake();
-                      },
-                      style: OutlinedButton.styleFrom(
-                        side: const BorderSide(color: Color(0xFF8B1220), width: 1.4),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(22),
-                        ),
-                        padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 12),
-                      ),
-                      child: Text(
-                        "CUT AGAIN 🔪",
-                        style: AppTheme.monoStyle(
-                          fontSize: 11,
-                          color: const Color(0xFF8B1220),
-                          fontWeight: FontWeight.w700,
-                        ),
-                      ),
-                    ),
-                    const SizedBox(width: 12),
-                    ElevatedButton(
-                      onPressed: () => Navigator.of(context).pop(),
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xFF8B1220),
-                        foregroundColor: Colors.white,
-                        elevation: 4,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(22),
-                        ),
-                        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-                      ),
-                      child: Text(
-                        "SWEET LOVE 💖",
-                        style: AppTheme.monoStyle(
-                          fontSize: 11,
-                          color: Colors.white,
-                          fontWeight: FontWeight.w700,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
-        );
-      },
-    );
+  String get _instructionText {
+    if (_isCut) {
+      return "🍰 Ceremonial slice cut! Replay slice or read birthday message below ♡";
+    } else if (_candlesBlown) {
+      return "🕯️ Wish made! Tap the cake (or cut button) to cut the ceremonial first slice 🔪";
+    } else {
+      return "✨ Step 1: Tap candles (or blow button) to blow out flames & make a wish! 🕯️";
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     final isMobile = Responsive.isMobile(context);
 
-    return Container(
-      width: double.infinity,
-      padding: EdgeInsets.symmetric(
-        horizontal: isMobile ? 16 : 32,
-        vertical: isMobile ? 24 : 36,
-      ),
-      decoration: BoxDecoration(
-        color: Colors.white.withValues(alpha: 0.95), // Luxury Pearl White Card
-        borderRadius: BorderRadius.circular(24),
-        border: Border.all(
-          color: const Color(0xFFD4AF37).withValues(alpha: 0.65), // Champagne Gold Hairline
-          width: 1.8,
-        ),
-        boxShadow: [
-          BoxShadow(
-            color: const Color(0xFF8B1220).withValues(alpha: 0.10),
-            blurRadius: 36,
-            offset: const Offset(0, 14),
+    return AnimatedBuilder(
+      animation: Listenable.merge([
+        _sliceAnimation,
+        _extinguishAnimation,
+        _flickerController,
+        _knifeHoverController,
+      ]),
+      builder: (context, child) {
+        final candleFlameGlow = (1.0 - _extinguishAnimation.value) * (0.08 + _flickerController.value * 0.04);
+
+        return Container(
+          width: double.infinity,
+          padding: EdgeInsets.symmetric(
+            horizontal: isMobile ? 16 : 32,
+            vertical: isMobile ? 24 : 36,
           ),
-          BoxShadow(
-            color: Colors.black.withValues(alpha: 0.05),
-            blurRadius: 18,
-            offset: const Offset(0, 6),
-          ),
-        ],
-      ),
-      child: Column(
-        children: [
-          // 1. Header Pill Badge
-          FittedBox(
-            fit: BoxFit.scaleDown,
-            child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 5.5),
-              decoration: BoxDecoration(
-                color: const Color(0xFFFFF8E7),
-                borderRadius: BorderRadius.circular(20),
-                border: Border.all(
-                  color: const Color(0xFFD4AF37).withValues(alpha: 0.60),
-                  width: 1.0,
-                ),
+          decoration: BoxDecoration(
+            color: const Color(0xFFFFF9F1), // Soft boutique cream warm ivory
+            borderRadius: BorderRadius.circular(24),
+            border: Border.all(
+              color: const Color(0xFFE8DDD2), // Delicate warm biscuit border
+              width: 1.5,
+            ),
+            boxShadow: [
+              // Ambient warm shadow
+              BoxShadow(
+                color: const Color(0xFF3D271D).withValues(alpha: 0.08),
+                blurRadius: 28,
+                offset: const Offset(0, 12),
               ),
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  const Icon(Icons.auto_awesome, size: 13, color: Color(0xFFD4AF37)),
-                  const SizedBox(width: 6),
-                  Text(
-                    "VINTAGE 3D BIRTHDAY CAKE · CELEBRATING 24 YEARS",
-                    style: GoogleFonts.plusJakartaSans(
-                      fontSize: isMobile ? 9 : 10.5,
-                      letterSpacing: 1.4,
-                      color: const Color(0xFF8B1220),
-                      fontWeight: FontWeight.w800,
+              // Golden candlelight ambient reflection
+              BoxShadow(
+                color: const Color(0xFFFFD54F).withValues(alpha: candleFlameGlow),
+                blurRadius: 36,
+                spreadRadius: 2,
+              ),
+            ],
+          ),
+          child: Column(
+            children: [
+              // 1. Header Pill Badge
+              FittedBox(
+                fit: BoxFit.scaleDown,
+                child: Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 5.5),
+                  decoration: BoxDecoration(
+                    color: const Color(0xFFFFF4EE),
+                    borderRadius: BorderRadius.circular(20),
+                    border: Border.all(
+                      color: const Color(0xFFE4C3AB),
+                      width: 1.0,
                     ),
                   ),
-                  const SizedBox(width: 6),
-                  const Icon(Icons.auto_awesome, size: 13, color: Color(0xFFD4AF37)),
-                ],
-              ),
-            ),
-          ),
-          const SizedBox(height: 12),
-
-          // Title
-          FittedBox(
-            fit: BoxFit.scaleDown,
-            child: Text(
-              "“Make a Wish & Cut the First Slice”",
-              textAlign: TextAlign.center,
-              style: GoogleFonts.cormorantGaramond(
-                fontSize: isMobile ? 26 : 34,
-                fontStyle: FontStyle.italic,
-                fontWeight: FontWeight.w700,
-                color: const Color(0xFF2C1820),
-              ),
-            ),
-          ),
-          const SizedBox(height: 6),
-
-          // Instruction Hint Pill
-          FittedBox(
-            fit: BoxFit.scaleDown,
-            child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 5),
-              decoration: BoxDecoration(
-                color: const Color(0xFFFFF0F2),
-                borderRadius: BorderRadius.circular(16),
-                border: Border.all(
-                  color: const Color(0xFFFFB6C1),
-                  width: 0.8,
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      const Icon(Icons.auto_awesome, size: 13, color: Color(0xFFB69A68)),
+                      const SizedBox(width: 6),
+                      Text(
+                        "VINTAGE 3D BIRTHDAY CAKE · CELEBRATING 24 YEARS",
+                        style: GoogleFonts.plusJakartaSans(
+                          fontSize: isMobile ? 9 : 10.5,
+                          letterSpacing: 1.4,
+                          color: const Color(0xFF722F37),
+                          fontWeight: FontWeight.w800,
+                        ),
+                      ),
+                      const SizedBox(width: 6),
+                      const Icon(Icons.auto_awesome, size: 13, color: Color(0xFFB69A68)),
+                    ],
+                  ),
                 ),
               ),
-              child: Text(
-                _isCut
-                    ? "🍰 Slice cut with endless love! Tap to replay ♡"
-                    : _candlesBlown
-                        ? "🕯️ Wish made! Tap knife to cut the slice 🔪"
-                        : "✨ Tap cake to cut or tap candle to blow out flames 🕯️",
-                textAlign: TextAlign.center,
-                style: GoogleFonts.plusJakartaSans(
-                  fontSize: isMobile ? 10 : 12,
-                  color: const Color(0xFF8B1220),
-                  fontWeight: FontWeight.w700,
+              const SizedBox(height: 12),
+
+              // Title
+              FittedBox(
+                fit: BoxFit.scaleDown,
+                child: Text(
+                  "“Make a Wish & Cut the First Slice”",
+                  textAlign: TextAlign.center,
+                  style: GoogleFonts.cormorantGaramond(
+                    fontSize: isMobile ? 26 : 34,
+                    fontStyle: FontStyle.italic,
+                    fontWeight: FontWeight.w700,
+                    color: const Color(0xFF282522),
+                  ),
                 ),
               ),
-            ),
-          ),
-          const SizedBox(height: 18),
+              const SizedBox(height: 6),
 
-          // 2. 3D Isometric Vintage Lambeth Cake Viewport
-          ClipRRect(
-            borderRadius: BorderRadius.circular(20),
-            child: Stack(
-              alignment: Alignment.center,
-              children: [
-                GestureDetector(
-                  onTap: _cutCake,
-                  child: AnimatedBuilder(
-                    animation: Listenable.merge([
-                      _sliceAnimation,
-                      _flickerController,
-                      _knifeHoverController,
-                    ]),
-                    builder: (context, child) {
-                      return FittedBox(
+              // Instruction Hint Pill
+              FittedBox(
+                fit: BoxFit.scaleDown,
+                child: Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 5),
+                  decoration: BoxDecoration(
+                    color: const Color(0xFFFFF2EB),
+                    borderRadius: BorderRadius.circular(16),
+                    border: Border.all(
+                      color: const Color(0xFFE4C3AB),
+                      width: 0.8,
+                    ),
+                  ),
+                  child: Text(
+                    _instructionText,
+                    textAlign: TextAlign.center,
+                    style: GoogleFonts.plusJakartaSans(
+                      fontSize: isMobile ? 10 : 12,
+                      color: const Color(0xFF722F37),
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 18),
+
+              // 2. 3D Isometric Vintage Lambeth Cake Viewport
+              ClipRRect(
+                borderRadius: BorderRadius.circular(20),
+                child: Stack(
+                  alignment: Alignment.center,
+                  children: [
+                    GestureDetector(
+                      onTap: () {
+                        if (!_candlesBlown) {
+                          _blowCandles();
+                        } else {
+                          _cutCake();
+                        }
+                      },
+                      child: FittedBox(
                         fit: BoxFit.scaleDown,
                         child: CustomPaint(
                           size: Size(isMobile ? 260 : 360, isMobile ? 210 : 270),
@@ -593,104 +513,220 @@ class _InteractiveCakeCuttingWidgetState
                             sliceProgress: _sliceAnimation.value,
                             isCut: _isCut,
                             candlesBlown: _candlesBlown,
+                            extinguishProgress: _extinguishAnimation.value,
                             flickerProgress: _flickerController.value,
                             knifeHover: _knifeHoverController.value,
                           ),
                         ),
+                      ),
+                    ),
+
+                    // Floating celebration confetti on cut
+                    ..._confetti.map((p) {
+                      return Positioned(
+                        left: p.x,
+                        top: p.y,
+                        child: Text(
+                          p.emoji,
+                          style: TextStyle(fontSize: p.size),
+                        ),
                       );
-                    },
-                  ),
-                ),
-
-                // Floating celebration confetti on cut
-                ..._confetti.map((p) {
-                  return Positioned(
-                    left: p.x,
-                    top: p.y,
-                    child: Text(
-                      p.emoji,
-                      style: TextStyle(fontSize: p.size),
-                    ),
-                  );
-                }),
-              ],
-            ),
-          ),
-          const SizedBox(height: 20),
-
-          // 3. Action Buttons: Blow Candles & Cut Cake
-          Wrap(
-            alignment: WrapAlignment.center,
-            spacing: 10,
-            runSpacing: 10,
-            children: [
-              // Blow / Relight Candles Button
-              FittedBox(
-                fit: BoxFit.scaleDown,
-                child: OutlinedButton.icon(
-                  onPressed: _blowCandles,
-                  style: OutlinedButton.styleFrom(
-                    side: BorderSide(
-                      color: _candlesBlown ? const Color(0xFFD4AF37) : const Color(0xFFFF9800),
-                      width: 1.4,
-                    ),
-                    backgroundColor: const Color(0xFFFFFBF0),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(24),
-                    ),
-                    padding: EdgeInsets.symmetric(
-                      horizontal: isMobile ? 14 : 22,
-                      vertical: isMobile ? 10 : 13,
-                    ),
-                  ),
-                  icon: Text(_candlesBlown ? "✨" : "🕯️", style: const TextStyle(fontSize: 16)),
-                  label: Text(
-                    _candlesBlown ? "RELIGHT CANDLES 🔥" : "BLOW CANDLES 💨",
-                    style: GoogleFonts.plusJakartaSans(
-                      fontSize: isMobile ? 10 : 11.5,
-                      fontWeight: FontWeight.w800,
-                      letterSpacing: 0.8,
-                      color: const Color(0xFF8B1220),
-                    ),
-                  ),
+                    }),
+                  ],
                 ),
               ),
+              const SizedBox(height: 20),
 
-              // Cut / Replay Cake Button
-              FittedBox(
-                fit: BoxFit.scaleDown,
-                child: ElevatedButton.icon(
-                  onPressed: _cutCake,
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFF8B1220), // Royal Carmine Burgundy
-                    foregroundColor: Colors.white,
-                    elevation: 5,
-                    shadowColor: const Color(0xFF8B1220).withValues(alpha: 0.35),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(24),
-                      side: const BorderSide(color: Color(0xFFD4AF37), width: 1.2),
-                    ),
-                    padding: EdgeInsets.symmetric(
-                      horizontal: isMobile ? 16 : 26,
-                      vertical: isMobile ? 11 : 14,
+              // 3. Action Buttons: Blow Candles & Cut Cake
+              Wrap(
+                alignment: WrapAlignment.center,
+                spacing: 10,
+                runSpacing: 10,
+                children: [
+                  // Blow / Relight Candles Button
+                  FittedBox(
+                    fit: BoxFit.scaleDown,
+                    child: OutlinedButton.icon(
+                      onPressed: _blowCandles,
+                      style: OutlinedButton.styleFrom(
+                        side: BorderSide(
+                          color: _candlesBlown ? const Color(0xFFB69A68) : const Color(0xFFD48B5E),
+                          width: 1.4,
+                        ),
+                        backgroundColor: const Color(0xFFFFF4EE),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(24),
+                        ),
+                        padding: EdgeInsets.symmetric(
+                          horizontal: isMobile ? 14 : 22,
+                          vertical: isMobile ? 10 : 13,
+                        ),
+                      ),
+                      icon: Text(_candlesBlown ? "✨" : "🕯️", style: const TextStyle(fontSize: 16)),
+                      label: Text(
+                        _candlesBlown ? "RELIGHT CANDLES 🔥" : "BLOW CANDLES 💨",
+                        style: GoogleFonts.plusJakartaSans(
+                          fontSize: isMobile ? 10 : 11.5,
+                          fontWeight: FontWeight.w800,
+                          letterSpacing: 0.8,
+                          color: const Color(0xFF722F37),
+                        ),
+                      ),
                     ),
                   ),
-                  icon: Text(_isCut ? "🍰" : "🔪", style: const TextStyle(fontSize: 17)),
-                  label: Text(
-                    _isCut ? "REPLAY SLICE 🍰" : "CUT FIRST SLICE 🎂",
-                    style: GoogleFonts.plusJakartaSans(
-                      fontSize: isMobile ? 10.5 : 12,
-                      fontWeight: FontWeight.w900,
-                      letterSpacing: 1.0,
-                      color: Colors.white,
+
+                  // Cut / Replay Cake Button
+                  FittedBox(
+                    fit: BoxFit.scaleDown,
+                    child: ElevatedButton.icon(
+                      onPressed: _cutCake,
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color(0xFF722F37), // Muted burgundy
+                        foregroundColor: Colors.white,
+                        elevation: 4,
+                        shadowColor: const Color(0xFF722F37).withValues(alpha: 0.30),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(24),
+                          side: const BorderSide(color: Color(0xFFE2C89A), width: 1.2),
+                        ),
+                        padding: EdgeInsets.symmetric(
+                          horizontal: isMobile ? 16 : 26,
+                          vertical: isMobile ? 11 : 14,
+                        ),
+                      ),
+                      icon: Text(_isCut ? "🍰" : "🔪", style: const TextStyle(fontSize: 17)),
+                      label: Text(
+                        _isCut ? "REPLAY SLICE 🍰" : "CUT FIRST SLICE 🎂",
+                        style: GoogleFonts.plusJakartaSans(
+                          fontSize: isMobile ? 10.5 : 12,
+                          fontWeight: FontWeight.w900,
+                          letterSpacing: 1.0,
+                          color: Colors.white,
+                        ),
+                      ),
                     ),
                   ),
-                ),
+                ],
+              ),
+
+              // 4. In-Place Non-Covering Birthday Celebration Card
+              AnimatedSize(
+                duration: const Duration(milliseconds: 450),
+                curve: Curves.easeOutCubic,
+                child: _isCut
+                    ? Container(
+                        margin: const EdgeInsets.only(top: 24),
+                        padding: EdgeInsets.symmetric(
+                          horizontal: isMobile ? 18 : 28,
+                          vertical: isMobile ? 20 : 26,
+                        ),
+                        decoration: BoxDecoration(
+                          color: const Color(0xFFFCFAF6), // Clean warm ivory
+                          borderRadius: BorderRadius.circular(20),
+                          border: Border.all(
+                            color: const Color(0xFFB69A68),
+                            width: 1.4,
+                          ),
+                          boxShadow: [
+                            BoxShadow(
+                              color: const Color(0xFF722F37).withValues(alpha: 0.08),
+                              blurRadius: 20,
+                              offset: const Offset(0, 8),
+                            ),
+                          ],
+                        ),
+                        child: Column(
+                          children: [
+                            const Text("🎉 🎂 🎉", style: TextStyle(fontSize: 28)),
+                            const SizedBox(height: 8),
+                            Text(
+                              "HAPPY BIRTHDAY, MY SOULMATE!",
+                              textAlign: TextAlign.center,
+                              style: GoogleFonts.cinzel(
+                                fontSize: isMobile ? 18 : 22,
+                                fontWeight: FontWeight.w900,
+                                letterSpacing: 1.8,
+                                color: const Color(0xFF722F37),
+                              ),
+                            ),
+                            const SizedBox(height: 6),
+                            Text(
+                              "You cut the ceremonial first slice of our 2026 Birthday Cake! 🍰",
+                              textAlign: TextAlign.center,
+                              style: GoogleFonts.caveat(
+                                fontSize: isMobile ? 18 : 22,
+                                color: const Color(0xFF4A3228),
+                                fontWeight: FontWeight.w700,
+                              ),
+                            ),
+                            const SizedBox(height: 10),
+                            Text(
+                              "“May every year we celebrate together be even sweeter than the last. You are my greatest joy, my best friend, and the love of my entire life.”",
+                              textAlign: TextAlign.center,
+                              style: GoogleFonts.cormorantGaramond(
+                                fontSize: isMobile ? 16 : 18,
+                                fontStyle: FontStyle.italic,
+                                fontWeight: FontWeight.w600,
+                                color: const Color(0xFF282522),
+                                height: 1.4,
+                              ),
+                            ),
+                            const SizedBox(height: 18),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                OutlinedButton(
+                                  onPressed: _resetCake,
+                                  style: OutlinedButton.styleFrom(
+                                    side: const BorderSide(color: Color(0xFF722F37), width: 1.4),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(22),
+                                    ),
+                                    padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 10),
+                                  ),
+                                  child: Text(
+                                    "CUT AGAIN 🔪",
+                                    style: AppTheme.monoStyle(
+                                      fontSize: 11,
+                                      color: const Color(0xFF722F37),
+                                      fontWeight: FontWeight.w700,
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(width: 12),
+                                ElevatedButton(
+                                  onPressed: () {
+                                    _blowCandles();
+                                  },
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: const Color(0xFF722F37),
+                                    foregroundColor: Colors.white,
+                                    elevation: 3,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(22),
+                                    ),
+                                    padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 10),
+                                  ),
+                                  child: Text(
+                                    _candlesBlown ? "RELIGHT CANDLES 🔥" : "MAKE ANOTHER WISH ✨",
+                                    style: AppTheme.monoStyle(
+                                      fontSize: 11,
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.w700,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      )
+                    : const SizedBox.shrink(),
               ),
             ],
           ),
-        ],
-      ),
+        );
+      },
     );
   }
 }
@@ -725,6 +761,7 @@ class _Real3DCakePainter extends CustomPainter {
   final double sliceProgress;
   final bool isCut;
   final bool candlesBlown;
+  final double extinguishProgress;
   final double flickerProgress;
   final double knifeHover;
 
@@ -732,6 +769,7 @@ class _Real3DCakePainter extends CustomPainter {
     required this.sliceProgress,
     required this.isCut,
     required this.candlesBlown,
+    required this.extinguishProgress,
     required this.flickerProgress,
     required this.knifeHover,
   });
@@ -990,44 +1028,64 @@ class _Real3DCakePainter extends CustomPainter {
         Paint()..color = const Color(0xFF3E2723)..strokeWidth = 1.2,
       );
 
-      if (!candlesBlown) {
+      // 8. Flame and Smoke Animation using extinguishProgress
+      final flameAlpha = (1.0 - extinguishProgress).clamp(0.0, 1.0);
+      final smokeAlpha = extinguishProgress.clamp(0.0, 1.0);
+
+      if (flameAlpha > 0.02) {
         // Flickering Dancing Flame
         final flickerOffset = (flickerProgress - 0.5) * 2.8 * (i == 1 ? -1 : 1);
         final flameX = candX + flickerOffset;
-        final flameY = candY - 38;
+        final flameY = candY - 38 + (extinguishProgress * 4.0);
+        final flameScale = 1.0 - (extinguishProgress * 0.35);
 
         // Outer Flame Halo Glow
         canvas.drawCircle(
           Offset(flameX, flameY),
-          9.5 + flickerProgress * 2.0,
-          Paint()..color = const Color(0xFFFFD54F).withValues(alpha: 0.35),
+          (9.5 + flickerProgress * 2.0) * flameScale,
+          Paint()..color = const Color(0xFFFFD54F).withValues(alpha: 0.35 * flameAlpha),
         );
 
         // Flame Teardrop
         final flamePath = Path();
-        flamePath.moveTo(flameX - 4.5, flameY + 6);
-        flamePath.quadraticBezierTo(flameX - 5.5, flameY - 2, flameX, flameY - 9);
-        flamePath.quadraticBezierTo(flameX + 5.5, flameY - 2, flameX + 4.5, flameY + 6);
+        flamePath.moveTo(flameX - 4.5 * flameScale, flameY + 6 * flameScale);
+        flamePath.quadraticBezierTo(flameX - 5.5 * flameScale, flameY - 2 * flameScale, flameX, flameY - 9 * flameScale);
+        flamePath.quadraticBezierTo(flameX + 5.5 * flameScale, flameY - 2 * flameScale, flameX + 4.5 * flameScale, flameY + 6 * flameScale);
         flamePath.close();
 
         canvas.drawPath(
           flamePath,
           Paint()
-            ..shader = const RadialGradient(
-              colors: [Color(0xFFFFF9C4), Color(0xFFFF9800), Color(0xFFFF3D00)],
-            ).createShader(Rect.fromCircle(center: Offset(flameX, flameY), radius: 8)),
+            ..shader = RadialGradient(
+              colors: [
+                const Color(0xFFFFF9C4).withValues(alpha: flameAlpha),
+                const Color(0xFFFF9800).withValues(alpha: flameAlpha),
+                const Color(0xFFFF3D00).withValues(alpha: flameAlpha),
+              ],
+            ).createShader(Rect.fromCircle(center: Offset(flameX, flameY), radius: 8 * flameScale)),
         );
-      } else {
-        // Delicate Smoke Curl when blown out
+      }
+
+      if (smokeAlpha > 0.05) {
+        // Delicate Smoke Curl drifting upward when extinguished
+        final smokeRise = extinguishProgress * 12.0;
         final smokePath = Path();
         smokePath.moveTo(candX, candY - 30);
-        smokePath.cubicTo(candX - 4, candY - 36, candX + 6, candY - 42, candX + 2, candY - 48);
+        smokePath.cubicTo(
+          candX - 4 - (extinguishProgress * 3),
+          candY - 36 - smokeRise * 0.4,
+          candX + 6 + (extinguishProgress * 4),
+          candY - 42 - smokeRise * 0.7,
+          candX + 2,
+          candY - 48 - smokeRise,
+        );
         canvas.drawPath(
           smokePath,
           Paint()
-            ..color = Colors.grey.withValues(alpha: 0.55)
+            ..color = const Color(0xFF8D8D8D).withValues(alpha: 0.65 * smokeAlpha)
             ..style = PaintingStyle.stroke
-            ..strokeWidth = 1.5,
+            ..strokeCap = StrokeCap.round
+            ..strokeWidth = 1.6,
         );
       }
     }
@@ -1121,6 +1179,7 @@ class _Real3DCakePainter extends CustomPainter {
       oldDelegate.sliceProgress != sliceProgress ||
       oldDelegate.isCut != isCut ||
       oldDelegate.candlesBlown != candlesBlown ||
+      oldDelegate.extinguishProgress != extinguishProgress ||
       oldDelegate.flickerProgress != flickerProgress ||
       oldDelegate.knifeHover != knifeHover;
 }

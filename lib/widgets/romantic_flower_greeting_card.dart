@@ -322,11 +322,13 @@ class _RomanticFlowerGreetingCardState extends State<RomanticFlowerGreetingCard>
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                     // Interactive Tap Hint Pill
-                    Container(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 16,
-                        vertical: 8,
-                      ),
+                    GestureDetector(
+                      onTap: _toggleCardOpen,
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 16,
+                          vertical: 8,
+                        ),
                       decoration: BoxDecoration(
                         color: Colors.black.withValues(alpha: 0.35),
                         borderRadius: BorderRadius.circular(20),
@@ -360,7 +362,8 @@ class _RomanticFlowerGreetingCardState extends State<RomanticFlowerGreetingCard>
                         ],
                       ),
                     ),
-                    const SizedBox(width: 16),
+                  ),
+                  const SizedBox(width: 16),
 
                     // Replay Animation Button
                     InkWell(
@@ -417,10 +420,11 @@ class _RomanticFlowerGreetingCardState extends State<RomanticFlowerGreetingCard>
   }
 
   /// Front View of the Greeting Card (The reference layout)
+  /// Front View of the Greeting Card (The reference layout)
   Widget _buildCardFront(bool isMobile) {
     final screenWidth = MediaQuery.of(context).size.width;
     final cardWidth = isMobile ? min(screenWidth - 32, 360.0) : 760.0;
-    final cardHeight = isMobile ? 260.0 : 440.0;
+    final cardHeight = isMobile ? 330.0 : 440.0;
 
     return AnimatedBuilder(
       animation: _glowPulse,
@@ -429,16 +433,16 @@ class _RomanticFlowerGreetingCardState extends State<RomanticFlowerGreetingCard>
           width: cardWidth,
           height: cardHeight,
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(8),
+            borderRadius: BorderRadius.circular(12),
             boxShadow: [
               BoxShadow(
                 color: const Color(0xFFFF69B4)
-                    .withValues(alpha: 0.18 * _glowPulse.value),
+                    .withValues(alpha: 0.20 * _glowPulse.value),
                 blurRadius: 40,
-                spreadRadius: 8,
+                spreadRadius: 6,
               ),
               BoxShadow(
-                color: Colors.black.withValues(alpha: 0.55),
+                color: Colors.black.withValues(alpha: 0.50),
                 blurRadius: 28,
                 offset: const Offset(0, 14),
               ),
@@ -452,19 +456,20 @@ class _RomanticFlowerGreetingCardState extends State<RomanticFlowerGreetingCard>
         children: [
           // 1. Hands and Cream Card Presentation Background
           ClipRRect(
-            borderRadius: BorderRadius.circular(8),
+            borderRadius: BorderRadius.circular(12),
             child: Image.asset(
               "assets/photos/hands_presenting_card.jpg",
               width: cardWidth,
               height: cardHeight,
               fit: BoxFit.cover,
+              filterQuality: FilterQuality.high,
             ),
           ),
 
           // 2. Vintage Stamp / Date Ticket on the left edge
           Positioned(
             left: isMobile ? 12 : 24,
-            bottom: isMobile ? 40 : 80,
+            bottom: isMobile ? 32 : 72,
             child: _buildVintageTicket(isMobile),
           ),
 
@@ -475,26 +480,27 @@ class _RomanticFlowerGreetingCardState extends State<RomanticFlowerGreetingCard>
               child: ScaleTransition(
                 scale: _bouquetScale,
                 child: SizedBox(
-                  width: isMobile ? 160 : 260,
-                  height: isMobile ? 210 : 340,
+                  width: isMobile ? 180 : 270,
+                  height: isMobile ? 230 : 340,
                   child: Image.asset(
                     "assets/photos/rose_bouquet_kraft.png",
                     fit: BoxFit.contain,
+                    filterQuality: FilterQuality.high,
                   ),
                 ),
               ),
             ),
           ),
 
-          // 4. Surrounding 8 Sweet Speech Bubbles
+          // 4. Surrounding 8 Sweet Speech Bubbles (Refined mobile spacing to avoid clipping)
           ..._messageBubbles.asMap().entries.map((entry) {
             final index = entry.key;
             final bubble = entry.value;
 
             return _buildAnimatedSpeechBubble(
               text: bubble["text"] as String,
-              dx: (bubble["dx"] as double) * (isMobile ? 0.95 : 1.0),
-              dy: (bubble["dy"] as double) * (isMobile ? 0.90 : 1.0),
+              dx: (bubble["dx"] as double) * (isMobile ? 0.78 : 1.0),
+              dy: (bubble["dy"] as double) * (isMobile ? 0.80 : 1.0),
               delayIndex: index,
               isMobile: isMobile,
             );
@@ -502,8 +508,8 @@ class _RomanticFlowerGreetingCardState extends State<RomanticFlowerGreetingCard>
 
           // 5. Adorable Kitten Delivery Sticker on bottom-right corner
           Positioned(
-            right: isMobile ? 8 : 22,
-            bottom: isMobile ? -6 : -8,
+            right: isMobile ? 10 : 24,
+            bottom: isMobile ? -4 : -8,
             child: IgnorePointer(
               child: SizedBox(
                 width: isMobile ? 75 : 110,
@@ -511,6 +517,7 @@ class _RomanticFlowerGreetingCardState extends State<RomanticFlowerGreetingCard>
                 child: Image.asset(
                   "assets/photos/cat_flowers_bow.png",
                   fit: BoxFit.contain,
+                  filterQuality: FilterQuality.high,
                 ),
               ),
             ),
@@ -524,7 +531,7 @@ class _RomanticFlowerGreetingCardState extends State<RomanticFlowerGreetingCard>
   Widget _buildCardInsideReveal(bool isMobile) {
     final screenWidth = MediaQuery.of(context).size.width;
     final cardWidth = isMobile ? min(screenWidth - 32, 360.0) : 760.0;
-    final cardHeight = isMobile ? 480.0 : 440.0;
+    final cardHeight = isMobile ? 330.0 : 440.0;
 
     return Container(
       width: cardWidth,
@@ -592,19 +599,19 @@ class _RomanticFlowerGreetingCardState extends State<RomanticFlowerGreetingCard>
                       ClipRRect(
                         borderRadius: BorderRadius.circular(2),
                         child: SizedBox(
-                          width: isMobile ? 90 : 160,
-                          height: isMobile ? 110 : 190,
+                          width: isMobile ? 82 : 160,
+                          height: isMobile ? 100 : 190,
                           child: Image.asset(
                             "assets/photos/traditional_couple.jpg",
                             fit: BoxFit.cover,
                           ),
                         ),
                       ),
-                      const SizedBox(height: 6),
+                      const SizedBox(height: 4),
                       Text(
                         "Forever Us ♡",
                         style: GoogleFonts.caveat(
-                          fontSize: isMobile ? 12 : 14,
+                          fontSize: isMobile ? 11 : 14,
                           color: const Color(0xFF5D4037),
                           fontWeight: FontWeight.bold,
                         ),
@@ -623,18 +630,18 @@ class _RomanticFlowerGreetingCardState extends State<RomanticFlowerGreetingCard>
                       Text(
                         "HAPPY BIRTHDAY,",
                         style: GoogleFonts.cinzel(
-                          fontSize: isMobile ? 18 : 26,
+                          fontSize: isMobile ? 15 : 26,
                           fontWeight: FontWeight.w800,
-                          letterSpacing: 2.0,
+                          letterSpacing: 1.5,
                           color: const Color(0xFF1B1B1B),
                         ),
                       ),
                       Text(
                         "MY SUNFLOWER 🌻",
                         style: GoogleFonts.cinzel(
-                          fontSize: isMobile ? 18 : 26,
+                          fontSize: isMobile ? 15 : 26,
                           fontWeight: FontWeight.w800,
-                          letterSpacing: 2.0,
+                          letterSpacing: 1.5,
                           color: const Color(0xFFB8860B),
                         ),
                       ),

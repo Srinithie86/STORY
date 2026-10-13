@@ -9,7 +9,12 @@ import 'who_is_he_movie_credits.dart';
 /// Exactly replicates the classic diploma award template (gold starburst seal, ornate guilloche border,
 /// formal citation text, and Srinithi's calligraphic signature).
 class FinalRevealSection extends StatelessWidget {
-  const FinalRevealSection({super.key});
+  final VoidCallback? onReplayStory;
+
+  const FinalRevealSection({
+    super.key,
+    this.onReplayStory,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -27,55 +32,16 @@ class FinalRevealSection extends StatelessWidget {
           constraints: const BoxConstraints(maxWidth: 1040), // Full-Screen Cover Width
           child: Column(
             children: [
-              // Main Full-Screen Classic Certificate Template
+              // 1. Main Full-Screen Classic Certificate Template
               const _ClassicBestBoyfriendCertificate(),
               const SizedBox(height: 48),
 
-              // "WHO IS HE?" Cinematic Movie Credits Pet Name Reel with Selvakumar's Gym Photo
+              // 2. "WHO IS HE?" Cinematic Movie Credits Pet Name Reel with Selvakumar's Gym Photo
               const WhoIsHeMovieCreditsSection(),
               const SizedBox(height: 48),
 
-              // Stylish Heart-Embedded Memory Quote Card ("A FOREVER REMINDER FOR YOU")
-              const _HeartMemoryFooterCard(),
-              const SizedBox(height: 36),
-
-              // Bottom Minimal Citation
-              FittedBox(
-                fit: BoxFit.scaleDown,
-                child: Text(
-                  "SELVAKUMAR  ♡  SRINITHI  ·  2026 → FOREVER",
-                  style: GoogleFonts.plusJakartaSans(
-                    fontSize: isMobile ? 11 : 12.5,
-                    letterSpacing: 3.2,
-                    color: Colors.white,
-                    fontWeight: FontWeight.w700,
-                    shadows: [
-                      Shadow(
-                        color: Colors.black.withValues(alpha: 0.8),
-                        blurRadius: 8,
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              const SizedBox(height: 10),
-              Text(
-                "Built with endless love for the one who holds my heart ♡",
-                textAlign: TextAlign.center,
-                style: GoogleFonts.cormorantGaramond(
-                  fontSize: isMobile ? 16 : 18,
-                  fontStyle: FontStyle.italic,
-                  fontWeight: FontWeight.w600,
-                  color: const Color(0xFFFFE082),
-                  letterSpacing: 0.5,
-                  shadows: [
-                    Shadow(
-                      color: Colors.black.withValues(alpha: 0.8),
-                      blurRadius: 8,
-                    ),
-                  ],
-                ),
-              ),
+              // 3. Grand Cinematic Movie End Card & Replay Action
+              _CinematicMovieEndCard(onReplayStory: onReplayStory),
             ],
           ),
         ),
@@ -426,15 +392,24 @@ class _GoldStarburstSealPainter extends CustomPainter {
   bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
 }
 
-/// Neat, Aesthetic, Clean Modern Luxury Memory Card for A FOREVER REMINDER
-class _HeartMemoryFooterCard extends StatefulWidget {
-  const _HeartMemoryFooterCard();
+/// Grand Cinematic Romantic Movie End Card
+/// Features:
+/// 1. Full-screen letterboxed 35mm film still with couple car photograph & subtitles.
+/// 2. Elegant typography with emotional focal point ("~ The End ~ Or rather, our beginning").
+/// 3. Refined film credits (Starring, Directed by, Soundtrack, Runtime).
+/// 4. Interactive Heartbeat sender counter.
+/// 5. Prominent "REPLAY OUR STORY ↺" smooth scroll action back to the start.
+/// 6. Warm sunset-inspired ivory, muted rose, burgundy and golden-hour colors.
+class _CinematicMovieEndCard extends StatefulWidget {
+  final VoidCallback? onReplayStory;
+
+  const _CinematicMovieEndCard({this.onReplayStory});
 
   @override
-  State<_HeartMemoryFooterCard> createState() => _HeartMemoryFooterCardState();
+  State<_CinematicMovieEndCard> createState() => _CinematicMovieEndCardState();
 }
 
-class _HeartMemoryFooterCardState extends State<_HeartMemoryFooterCard>
+class _CinematicMovieEndCardState extends State<_CinematicMovieEndCard>
     with SingleTickerProviderStateMixin {
   late AnimationController _pulseController;
   late Animation<double> _pulseAnimation;
@@ -470,6 +445,21 @@ class _HeartMemoryFooterCardState extends State<_HeartMemoryFooterCard>
     });
   }
 
+  void _handleReplay(BuildContext context) {
+    if (widget.onReplayStory != null) {
+      widget.onReplayStory!();
+    } else {
+      final scrollable = Scrollable.maybeOf(context);
+      if (scrollable != null) {
+        scrollable.position.animateTo(
+          0.0,
+          duration: const Duration(milliseconds: 900),
+          curve: Curves.easeInOutCubic,
+        );
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final isMobile = Responsive.isMobile(context);
@@ -477,194 +467,399 @@ class _HeartMemoryFooterCardState extends State<_HeartMemoryFooterCard>
     return Container(
       width: double.infinity,
       decoration: BoxDecoration(
-        color: Colors.white.withValues(alpha: 0.94), // Luxurious Pearl White / Pure Ivory
-        borderRadius: BorderRadius.circular(24),
+        color: const Color(0xFF1F0C12), // Deep Twilight Burgundy
+        borderRadius: BorderRadius.circular(28),
         border: Border.all(
-          color: const Color(0xFFD4AF37).withValues(alpha: 0.50), // Fine Champagne Gold Hairline
-          width: 1.4,
+          color: const Color(0xFFD4AF37).withValues(alpha: 0.70), // Antique Champagne Gold
+          width: 1.6,
         ),
         boxShadow: [
           BoxShadow(
-            color: const Color(0xFF8B1220).withValues(alpha: 0.08),
-            blurRadius: 36,
+            color: const Color(0xFF722F37).withValues(alpha: 0.35),
+            blurRadius: 40,
             offset: const Offset(0, 16),
           ),
           BoxShadow(
-            color: Colors.black.withValues(alpha: 0.05),
-            blurRadius: 18,
-            offset: const Offset(0, 6),
+            color: Colors.black.withValues(alpha: 0.50),
+            blurRadius: 24,
+            offset: const Offset(0, 8),
           ),
         ],
       ),
       child: ClipRRect(
-        borderRadius: BorderRadius.circular(24),
-        child: Stack(
+        borderRadius: BorderRadius.circular(26),
+        child: Column(
           children: [
-            // Delicate Top Gold Ambient Highlight
-            Positioned(
-              top: 0,
-              left: 40,
-              right: 40,
-              height: 1,
-              child: Container(
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    colors: [
-                      Colors.transparent,
-                      const Color(0xFFD4AF37).withValues(alpha: 0.6),
-                      Colors.transparent,
-                    ],
-                  ),
+            // 1. Subtle Golden-Hour Top Highlight Bar
+            Container(
+              height: 2.5,
+              width: double.infinity,
+              decoration: const BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [
+                    Color(0xFF722F37),
+                    Color(0xFFD4AF37),
+                    Color(0xFFFFF9F1),
+                    Color(0xFFD4AF37),
+                    Color(0xFF722F37),
+                  ],
                 ),
               ),
             ),
 
             Padding(
               padding: EdgeInsets.symmetric(
-                horizontal: isMobile ? 24 : 52,
-                vertical: isMobile ? 36 : 48,
+                horizontal: isMobile ? 18 : 48,
+                vertical: isMobile ? 32 : 56,
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  // 1. Ultra-Clean Minimalist Header Pill Badge
-                  Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 7),
-                    decoration: BoxDecoration(
-                      color: const Color(0xFFFFF8E7),
-                      borderRadius: BorderRadius.circular(30),
-                      border: Border.all(
-                        color: const Color(0xFFD4AF37).withValues(alpha: 0.60),
-                        width: 1.0,
+                  // 2. Cinematic Clapperboard Header Pill
+                  FittedBox(
+                    fit: BoxFit.scaleDown,
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6.5),
+                      decoration: BoxDecoration(
+                        color: const Color(0xFF2E131B),
+                        borderRadius: BorderRadius.circular(30),
+                        border: Border.all(
+                          color: const Color(0xFFD4AF37).withValues(alpha: 0.70),
+                          width: 1.0,
+                        ),
                       ),
-                    ),
-                    child: FittedBox(
-                      fit: BoxFit.scaleDown,
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          const Icon(
-                            Icons.auto_awesome,
-                            size: 13,
-                            color: Color(0xFFD4AF37),
-                          ),
+                          const Text("🎬", style: TextStyle(fontSize: 13)),
                           const SizedBox(width: 8),
                           Text(
-                            "A FOREVER REMINDER FOR YOU",
+                            "THE FINAL SCENE · A LIFETIME PRODUCTION",
                             style: GoogleFonts.plusJakartaSans(
-                              fontSize: isMobile ? 10 : 11.5,
-                              letterSpacing: 2.8,
-                              fontWeight: FontWeight.w700,
-                              color: const Color(0xFF8B1220),
+                              fontSize: isMobile ? 9.5 : 11,
+                              letterSpacing: 2.2,
+                              fontWeight: FontWeight.w800,
+                              color: const Color(0xFFE2C89A),
                             ),
                           ),
+                          const SizedBox(width: 8),
+                          const Text("✨", style: TextStyle(fontSize: 13)),
                         ],
                       ),
                     ),
                   ),
                   const SizedBox(height: 28),
 
-                  // 2. High-End Editorial Serif Quote
-                  Text(
-                    "“${StoryConfig.finalFooterText}”",
-                    textAlign: TextAlign.center,
-                    style: GoogleFonts.playfairDisplay(
-                      fontSize: isMobile ? 24 : 32,
-                      fontStyle: FontStyle.italic,
-                      fontWeight: FontWeight.w600,
-                      height: 1.5,
-                      color: const Color(0xFF2C1820), // Royal Burgundy / Rich Espresso
+                  // 3. 35mm Widescreen Letterbox Film Still of Selva & Srinithi
+                  Container(
+                    width: double.infinity,
+                    constraints: BoxConstraints(
+                      maxWidth: isMobile ? 340 : 540,
                     ),
-                  ),
-                  const SizedBox(height: 16),
+                    decoration: BoxDecoration(
+                      color: Colors.black,
+                      borderRadius: BorderRadius.circular(18),
+                      border: Border.all(
+                        color: const Color(0xFFB69A68).withValues(alpha: 0.6),
+                        width: 1.5,
+                      ),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withValues(alpha: 0.6),
+                          blurRadius: 20,
+                          offset: const Offset(0, 10),
+                        ),
+                      ],
+                    ),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(16),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          // Letterbox Top Bar with Film Stamp
+                          Container(
+                            color: const Color(0xFF0F0508),
+                            padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
+                            child: FittedBox(
+                              fit: BoxFit.scaleDown,
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    "KODAK VISION3 · 35MM",
+                                    style: GoogleFonts.plusJakartaSans(
+                                      fontSize: 8.5,
+                                      letterSpacing: 1.5,
+                                      color: const Color(0xFFB69A68),
+                                      fontWeight: FontWeight.w700,
+                                    ),
+                                  ),
+                                  const SizedBox(width: 24),
+                                  Text(
+                                    "SCENE 24 · TAKE ∞",
+                                    style: GoogleFonts.plusJakartaSans(
+                                      fontSize: 8.5,
+                                      letterSpacing: 1.5,
+                                      color: const Color(0xFFE2C89A),
+                                      fontWeight: FontWeight.w700,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
 
-                  // 3. Clean Warm Sub-Caption
-                  ConstrainedBox(
-                    constraints: const BoxConstraints(maxWidth: 620),
-                    child: Text(
-                      "A digital sanctuary crafted with infinite love. Whenever your heart searches for quiet comfort, every laughter, every walk, and every promise is kept safe right here.",
-                      textAlign: TextAlign.center,
-                      style: GoogleFonts.plusJakartaSans(
-                        fontSize: isMobile ? 13 : 14.5,
-                        color: const Color(0xFF4E342E), // Warm Rich Espresso
-                        height: 1.65,
-                        fontWeight: FontWeight.w500,
+                          // Framed Couple Photograph
+                          AspectRatio(
+                            aspectRatio: 16 / 10,
+                            child: Image.asset(
+                              'assets/photos/who_is_he_couple_car.jpg',
+                              fit: BoxFit.cover,
+                              alignment: const Alignment(0, -0.2),
+                              errorBuilder: (context, error, stackTrace) {
+                                return Container(
+                                  color: const Color(0xFF2C1016),
+                                  child: const Center(
+                                    child: Icon(Icons.favorite, color: Colors.white, size: 36),
+                                  ),
+                                );
+                              },
+                            ),
+                          ),
+
+                          // Subtitle Dialogue Bar
+                          Container(
+                            width: double.infinity,
+                            color: const Color(0xFF0F0508),
+                            padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+                            child: Text(
+                              "“You made me realize what forever feels like.”",
+                              textAlign: TextAlign.center,
+                              style: GoogleFonts.cormorantGaramond(
+                                fontSize: isMobile ? 13 : 15,
+                                fontStyle: FontStyle.italic,
+                                fontWeight: FontWeight.w600,
+                                color: const Color(0xFFFFF9F1),
+                                shadows: [
+                                  Shadow(
+                                    color: Colors.black.withValues(alpha: 0.9),
+                                    blurRadius: 4,
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                   ),
                   const SizedBox(height: 32),
 
-                  // 4. Neat Interactive Heartbeat Button
-                  GestureDetector(
-                    onTap: _onSendHeartbeat,
-                    child: AnimatedScale(
-                      scale: _justTapped ? 1.05 : 1.0,
-                      duration: const Duration(milliseconds: 180),
-                      child: Container(
-                        padding: EdgeInsets.symmetric(
-                          horizontal: isMobile ? 20 : 26,
-                          vertical: isMobile ? 11 : 13,
+                  // 4. Emotional Title: ~ The End ~
+                  Text(
+                    "~ The End ~",
+                    textAlign: TextAlign.center,
+                    style: GoogleFonts.greatVibes(
+                      fontSize: isMobile ? 44 : 58,
+                      fontWeight: FontWeight.w400,
+                      color: const Color(0xFFE2C89A), // Warm Antique Gold
+                      shadows: [
+                        Shadow(
+                          color: Colors.black.withValues(alpha: 0.6),
+                          blurRadius: 10,
                         ),
-                        decoration: BoxDecoration(
-                          color: _justTapped ? const Color(0xFFFFECEE) : const Color(0xFFFFFBF5),
-                          borderRadius: BorderRadius.circular(40),
-                          border: Border.all(
-                            color: _justTapped
-                                ? const Color(0xFFFF4D6D).withValues(alpha: 0.8)
-                                : const Color(0xFFD4AF37).withValues(alpha: 0.60),
-                            width: 1.2,
-                          ),
-                          boxShadow: [
-                            BoxShadow(
-                              color: _justTapped
-                                  ? const Color(0xFFFF4D6D).withValues(alpha: 0.25)
-                                  : Colors.black.withValues(alpha: 0.05),
-                              blurRadius: 16,
-                              offset: const Offset(0, 4),
-                            ),
-                          ],
-                        ),
-                        child: FittedBox(
-                          fit: BoxFit.scaleDown,
-                          child: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              ScaleTransition(
-                                scale: _pulseAnimation,
-                                child: Icon(
-                                  Icons.favorite_rounded,
-                                  size: isMobile ? 18 : 20,
-                                  color: const Color(0xFFFF4D6D),
-                                ),
-                              ),
-                              const SizedBox(width: 10),
-                              Text(
-                                _justTapped
-                                    ? "Heartbeat Received ♡"
-                                    : "Send a Heartbeat (${_heartbeatsSent.toString().replaceAllMapped(RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'), (m) => '${m[1]},')})",
-                                style: GoogleFonts.plusJakartaSans(
-                                  fontSize: isMobile ? 12.5 : 13.5,
-                                  fontWeight: FontWeight.w700,
-                                  color: const Color(0xFF2C1820),
-                                  letterSpacing: 0.5,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 4),
+
+                  Text(
+                    "Or rather, the beautiful start of every tomorrow with you.",
+                    textAlign: TextAlign.center,
+                    style: GoogleFonts.cormorantGaramond(
+                      fontSize: isMobile ? 17 : 21,
+                      fontStyle: FontStyle.italic,
+                      fontWeight: FontWeight.w600,
+                      color: const Color(0xFFFFF4EE),
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+
+                  // 5. Final Message Quote with Whitespace & Intimacy
+                  ConstrainedBox(
+                    constraints: const BoxConstraints(maxWidth: 620),
+                    child: Text(
+                      "“${StoryConfig.finalFooterText}”",
+                      textAlign: TextAlign.center,
+                      style: GoogleFonts.cormorantGaramond(
+                        fontSize: isMobile ? 21 : 27,
+                        fontStyle: FontStyle.italic,
+                        fontWeight: FontWeight.w700,
+                        height: 1.45,
+                        color: const Color(0xFFFFE8E0),
                       ),
                     ),
                   ),
-                  const SizedBox(height: 36),
+                  const SizedBox(height: 12),
 
-                  // 5. Aesthetic Minimal Divider & Names
+                  ConstrainedBox(
+                    constraints: const BoxConstraints(maxWidth: 580),
+                    child: Text(
+                      "A digital sanctuary crafted with infinite love. Whenever your heart searches for quiet comfort, every laughter, every walk, and every promise is kept safe right here.",
+                      textAlign: TextAlign.center,
+                      style: GoogleFonts.plusJakartaSans(
+                        fontSize: isMobile ? 12 : 14,
+                        color: const Color(0xFFD7A6A1),
+                        height: 1.6,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+
+                  Text(
+                    "~ No matter where life leads us, my heart will always choose you ♡ — Srinithi ~",
+                    textAlign: TextAlign.center,
+                    style: GoogleFonts.caveat(
+                      fontSize: isMobile ? 18 : 22,
+                      color: const Color(0xFFFF9EAA),
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                  const SizedBox(height: 32),
+
+                  // 6. Refined Film-Credit Style Block
+                  Container(
+                    width: double.infinity,
+                    constraints: const BoxConstraints(maxWidth: 640),
+                    padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 16),
+                    decoration: BoxDecoration(
+                      color: Colors.black.withValues(alpha: 0.35),
+                      borderRadius: BorderRadius.circular(16),
+                      border: Border.all(
+                        color: const Color(0xFFB69A68).withValues(alpha: 0.35),
+                        width: 1.0,
+                      ),
+                    ),
+                    child: Wrap(
+                      alignment: WrapAlignment.spaceAround,
+                      spacing: 20,
+                      runSpacing: 12,
+                      children: [
+                        _buildCreditItem("STARRING", "Selvakumar & Srinithi", isMobile),
+                        _buildCreditItem("DIRECTED BY", "Love & Destiny", isMobile),
+                        _buildCreditItem("SOUNDTRACK", "Un Kaiyil En Peyar ♡", isMobile),
+                        _buildCreditItem("RUNTIME", "2022 → Forever", isMobile),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 32),
+
+                  // 7. Interactive Heartbeat Button & Replay Action Row
+                  Wrap(
+                    alignment: WrapAlignment.center,
+                    spacing: 12,
+                    runSpacing: 12,
+                    children: [
+                      // Heartbeat Sender
+                      GestureDetector(
+                        onTap: _onSendHeartbeat,
+                        child: AnimatedScale(
+                          scale: _justTapped ? 1.05 : 1.0,
+                          duration: const Duration(milliseconds: 180),
+                          child: Container(
+                            padding: EdgeInsets.symmetric(
+                              horizontal: isMobile ? 16 : 22,
+                              vertical: isMobile ? 11 : 13,
+                            ),
+                            decoration: BoxDecoration(
+                              color: _justTapped ? const Color(0xFF4A1822) : const Color(0xFF2E131B),
+                              borderRadius: BorderRadius.circular(30),
+                              border: Border.all(
+                                color: _justTapped
+                                    ? const Color(0xFFFF4D6D)
+                                    : const Color(0xFFD4AF37).withValues(alpha: 0.65),
+                                width: 1.2,
+                              ),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black.withValues(alpha: 0.25),
+                                  blurRadius: 10,
+                                  offset: const Offset(0, 3),
+                                ),
+                              ],
+                            ),
+                            child: FittedBox(
+                              fit: BoxFit.scaleDown,
+                              child: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  ScaleTransition(
+                                    scale: _pulseAnimation,
+                                    child: const Icon(
+                                      Icons.favorite_rounded,
+                                      size: 16,
+                                      color: Color(0xFFFF4D6D),
+                                    ),
+                                  ),
+                                  const SizedBox(width: 8),
+                                  Text(
+                                    _justTapped
+                                        ? "Heartbeat Received ♡"
+                                        : "Send a Heartbeat (${_heartbeatsSent.toString().replaceAllMapped(RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'), (m) => '${m[1]},')})",
+                                    style: GoogleFonts.plusJakartaSans(
+                                      fontSize: isMobile ? 11 : 12.5,
+                                      fontWeight: FontWeight.w700,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+
+                      // Replay Story Action Button (Returns to top smoothly)
+                      ElevatedButton.icon(
+                        onPressed: () => _handleReplay(context),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: const Color(0xFF722F37), // Muted Burgundy
+                          foregroundColor: Colors.white,
+                          elevation: 6,
+                          shadowColor: const Color(0xFF722F37).withValues(alpha: 0.50),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(30),
+                            side: const BorderSide(color: Color(0xFFE2C89A), width: 1.4),
+                          ),
+                          padding: EdgeInsets.symmetric(
+                            horizontal: isMobile ? 20 : 28,
+                            vertical: isMobile ? 11 : 13,
+                          ),
+                        ),
+                        icon: const Icon(Icons.replay_rounded, size: 16, color: Color(0xFFE2C89A)),
+                        label: Text(
+                          "REPLAY OUR STORY ↺",
+                          style: GoogleFonts.plusJakartaSans(
+                            fontSize: isMobile ? 11 : 12.5,
+                            fontWeight: FontWeight.w800,
+                            letterSpacing: 1.2,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 32),
+
+                  // 8. Elegant Minimal Divider & Couple Citation
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Container(
-                        width: isMobile ? 32 : 60,
+                        width: isMobile ? 36 : 70,
                         height: 1,
-                        color: const Color(0xFFD4AF37).withValues(alpha: 0.25),
+                        color: const Color(0xFFD4AF37).withValues(alpha: 0.35),
                       ),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 14),
@@ -672,36 +867,36 @@ class _HeartMemoryFooterCardState extends State<_HeartMemoryFooterCard>
                           "◆",
                           style: TextStyle(
                             fontSize: 9,
-                            color: const Color(0xFFD4AF37).withValues(alpha: 0.7),
+                            color: const Color(0xFFD4AF37).withValues(alpha: 0.8),
                           ),
                         ),
                       ),
                       Container(
-                        width: isMobile ? 32 : 60,
+                        width: isMobile ? 36 : 70,
                         height: 1,
-                        color: const Color(0xFFD4AF37).withValues(alpha: 0.25),
+                        color: const Color(0xFFD4AF37).withValues(alpha: 0.35),
                       ),
                     ],
                   ),
                   const SizedBox(height: 14),
 
-                  // Couple Signature Text
+                  // Couple Names
                   Text(
                     "SELVAKUMAR  ·  SRINITHI",
                     style: GoogleFonts.plusJakartaSans(
-                      fontSize: isMobile ? 12 : 13.5,
-                      fontWeight: FontWeight.w700,
+                      fontSize: isMobile ? 12 : 14,
+                      fontWeight: FontWeight.w800,
                       letterSpacing: 3.5,
-                      color: const Color(0xFF8B1220),
+                      color: const Color(0xFFE2C89A),
                     ),
                   ),
                   const SizedBox(height: 4),
                   Text(
                     "Our Love Story  ·  Since 2022  ·  Forever & Beyond",
                     style: GoogleFonts.plusJakartaSans(
-                      fontSize: isMobile ? 10 : 11,
-                      letterSpacing: 1.5,
-                      color: const Color(0xFF5D4037),
+                      fontSize: isMobile ? 10 : 11.5,
+                      letterSpacing: 1.6,
+                      color: const Color(0xFFD7A6A1),
                       fontWeight: FontWeight.w600,
                     ),
                   ),
@@ -711,6 +906,33 @@ class _HeartMemoryFooterCardState extends State<_HeartMemoryFooterCard>
           ],
         ),
       ),
+    );
+  }
+
+  static Widget _buildCreditItem(String label, String value, bool isMobile) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Text(
+          label,
+          style: GoogleFonts.plusJakartaSans(
+            fontSize: isMobile ? 8.5 : 9.5,
+            letterSpacing: 1.8,
+            fontWeight: FontWeight.w800,
+            color: const Color(0xFFB69A68),
+          ),
+        ),
+        const SizedBox(height: 2),
+        Text(
+          value,
+          style: GoogleFonts.cormorantGaramond(
+            fontSize: isMobile ? 13 : 15,
+            fontWeight: FontWeight.w700,
+            color: const Color(0xFFFFF9F1),
+          ),
+        ),
+      ],
     );
   }
 }

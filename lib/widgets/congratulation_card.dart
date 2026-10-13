@@ -160,32 +160,41 @@ class _CongratulationCardState extends State<CongratulationCard>
               ),
               margin: const EdgeInsets.symmetric(vertical: 20, horizontal: 12),
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(16),
+                borderRadius: BorderRadius.circular(22),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black.withValues(alpha: 0.22),
+                    color: const Color(0xFF3D271D).withValues(alpha: 0.08),
                     blurRadius: 28,
-                    offset: const Offset(0, 14),
+                    offset: const Offset(0, 12),
+                  ),
+                  BoxShadow(
+                    color: const Color(0xFFB69A68).withValues(alpha: 0.06),
+                    blurRadius: 14,
+                    spreadRadius: 1,
                   ),
                 ],
               ),
               child: ClipRRect(
-                borderRadius: BorderRadius.circular(16),
+                borderRadius: BorderRadius.circular(22),
                 child: CustomPaint(
                   painter: _GinghamBorderPainter(),
                   child: Container(
-                    margin: const EdgeInsets.all(16), // Gingham border margin
+                    margin: const EdgeInsets.all(14), // Gingham border margin
                     decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(4),
+                      color: const Color(0xFFFFFDF9), // Warm ivory parchment
+                      borderRadius: BorderRadius.circular(14),
+                      border: Border.all(
+                        color: const Color(0xFFE8DDD2),
+                        width: 1.0,
+                      ),
                     ),
                     child: ClipRRect(
-                      borderRadius: BorderRadius.circular(4),
+                      borderRadius: BorderRadius.circular(14),
                       child: CustomPaint(
                         painter: _GraphPaperPainter(),
                         child: Stack(
                           children: [
-                            // 4 Red Corner Stars
+                            // 4 Gold Corner Stars
                             const Positioned(
                               top: 8,
                               left: 8,
@@ -310,11 +319,11 @@ class _CongratulationCardState extends State<CongratulationCard>
           Text(
             "Happy birthday, love!",
             textAlign: TextAlign.center,
-            style: GoogleFonts.comicNeue(
-              fontSize: isMobile ? 26 : 34,
-              fontWeight: FontWeight.w700,
-              color: const Color(0xFF990000),
-              letterSpacing: 0.2,
+            style: GoogleFonts.cinzel(
+              fontSize: isMobile ? 22 : 28,
+              fontWeight: FontWeight.w800,
+              color: const Color(0xFF4A3228),
+              letterSpacing: 1.2,
             ),
           ),
           const SizedBox(height: 6),
@@ -322,9 +331,9 @@ class _CongratulationCardState extends State<CongratulationCard>
             "do you wanna open your gift",
             textAlign: TextAlign.center,
             style: GoogleFonts.caveat(
-              fontSize: isMobile ? 20 : 25,
+              fontSize: isMobile ? 21 : 26,
               fontWeight: FontWeight.w600,
-              color: const Color(0xFF8B1E1E),
+              color: const Color(0xFF80604B),
             ),
           ),
           SizedBox(height: isMobile ? 20 : 28),
@@ -346,7 +355,7 @@ class _CongratulationCardState extends State<CongratulationCard>
                 borderRadius: BorderRadius.circular(16),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black.withValues(alpha: 0.12),
+                    color: const Color(0xFF3D271D).withValues(alpha: 0.10),
                     blurRadius: 18,
                     offset: const Offset(0, 8),
                   ),
@@ -376,16 +385,18 @@ class _CongratulationCardState extends State<CongratulationCard>
                   borderRadius: BorderRadius.circular(24),
                   child: Container(
                     padding: EdgeInsets.symmetric(
-                      horizontal: isMobile ? 24 : 32,
+                      horizontal: isMobile ? 26 : 34,
                       vertical: isMobile ? 10 : 13,
                     ),
                     decoration: BoxDecoration(
-                      color: Colors.white,
+                      gradient: const LinearGradient(
+                        colors: [Color(0xFF9E4B57), Color(0xFF722F37)],
+                      ),
                       borderRadius: BorderRadius.circular(24),
-                      border: Border.all(color: const Color(0xFF81C784), width: 1.8),
+                      border: Border.all(color: const Color(0xFFE2C89A), width: 1.4),
                       boxShadow: [
                         BoxShadow(
-                          color: const Color(0xFF4CAF50).withValues(alpha: 0.18),
+                          color: const Color(0xFF722F37).withValues(alpha: 0.28),
                           blurRadius: 10,
                           offset: const Offset(0, 3),
                         ),
@@ -394,14 +405,15 @@ class _CongratulationCardState extends State<CongratulationCard>
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        const Icon(Icons.check_circle, size: 20, color: Color(0xFF2E7D32)),
+                        const Icon(Icons.check_circle_rounded, size: 18, color: Colors.white),
                         const SizedBox(width: 8),
                         Text(
                           "YES",
-                          style: GoogleFonts.comicNeue(
-                            fontSize: isMobile ? 16 : 19,
-                            fontWeight: FontWeight.w700,
-                            color: const Color(0xFF2E7D32),
+                          style: GoogleFonts.plusJakartaSans(
+                            fontSize: isMobile ? 14 : 16,
+                            fontWeight: FontWeight.w800,
+                            letterSpacing: 1.0,
+                            color: Colors.white,
                           ),
                         ),
                       ],
@@ -415,32 +427,33 @@ class _CongratulationCardState extends State<CongratulationCard>
                   borderRadius: BorderRadius.circular(24),
                   child: Container(
                     padding: EdgeInsets.symmetric(
-                      horizontal: isMobile ? 24 : 32,
+                      horizontal: isMobile ? 26 : 34,
                       vertical: isMobile ? 10 : 13,
                     ),
                     decoration: BoxDecoration(
-                      color: Colors.white,
+                      color: const Color(0xFFFFF9F1),
                       borderRadius: BorderRadius.circular(24),
-                      border: Border.all(color: const Color(0xFFE57373), width: 1.8),
+                      border: Border.all(color: const Color(0xFFE5DDD0), width: 1.4),
                       boxShadow: [
                         BoxShadow(
-                          color: const Color(0xFFE53935).withValues(alpha: 0.16),
-                          blurRadius: 10,
-                          offset: const Offset(0, 3),
+                          color: const Color(0xFF80604B).withValues(alpha: 0.08),
+                          blurRadius: 8,
+                          offset: const Offset(0, 2),
                         ),
                       ],
                     ),
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        const Icon(Icons.cancel, size: 20, color: Color(0xFFC62828)),
+                        const Icon(Icons.close_rounded, size: 18, color: Color(0xFF80604B)),
                         const SizedBox(width: 8),
                         Text(
                           "NO",
-                          style: GoogleFonts.comicNeue(
-                            fontSize: isMobile ? 16 : 19,
+                          style: GoogleFonts.plusJakartaSans(
+                            fontSize: isMobile ? 14 : 16,
                             fontWeight: FontWeight.w700,
-                            color: const Color(0xFFC62828),
+                            letterSpacing: 1.0,
+                            color: const Color(0xFF80604B),
                           ),
                         ),
                       ],
@@ -475,7 +488,7 @@ class _CongratulationCardState extends State<CongratulationCard>
             style: GoogleFonts.caveat(
               fontSize: isMobile ? 32 : 44,
               fontWeight: FontWeight.w700,
-              color: const Color(0xFF990000),
+              color: const Color(0xFF722F37),
             ),
           ),
           SizedBox(height: isMobile ? 16 : 24),
@@ -487,7 +500,7 @@ class _CongratulationCardState extends State<CongratulationCard>
               borderRadius: BorderRadius.circular(16),
               boxShadow: [
                 BoxShadow(
-                  color: Colors.black.withValues(alpha: 0.12),
+                  color: const Color(0xFF3D271D).withValues(alpha: 0.08),
                   blurRadius: 16,
                   offset: const Offset(0, 6),
                 ),
@@ -515,24 +528,24 @@ class _CongratulationCardState extends State<CongratulationCard>
                 vertical: isMobile ? 10 : 13,
               ),
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: const Color(0xFFFFF9F1),
                 borderRadius: BorderRadius.circular(24),
-                border: Border.all(color: const Color(0xFF8B0000), width: 2.2),
+                border: Border.all(color: const Color(0xFF5A3E2B), width: 1.8),
                 boxShadow: [
                   BoxShadow(
-                    color: const Color(0xFF8B0000).withValues(alpha: 0.18),
-                    blurRadius: 10,
-                    offset: const Offset(0, 3),
+                    color: const Color(0xFF5A3E2B).withValues(alpha: 0.12),
+                    blurRadius: 8,
+                    offset: const Offset(0, 2),
                   ),
                 ],
               ),
               child: Text(
                 "TRY AGAIN",
-                style: GoogleFonts.comicNeue(
-                  fontSize: isMobile ? 16 : 19,
+                style: GoogleFonts.plusJakartaSans(
+                  fontSize: isMobile ? 14 : 16,
                   fontWeight: FontWeight.w800,
                   letterSpacing: 1.2,
-                  color: const Color(0xFF1B1B1B),
+                  color: const Color(0xFF382319),
                 ),
               ),
             ),
@@ -560,10 +573,10 @@ class _CongratulationCardState extends State<CongratulationCard>
           Text(
             "Tap to open",
             textAlign: TextAlign.center,
-            style: GoogleFonts.comicNeue(
-              fontSize: isMobile ? 26 : 34,
+            style: GoogleFonts.cinzel(
+              fontSize: isMobile ? 24 : 30,
               fontWeight: FontWeight.w700,
-              color: const Color(0xFF8B0000),
+              color: const Color(0xFF4A3228),
             ),
           ),
           SizedBox(height: isMobile ? 22 : 30),
@@ -576,11 +589,15 @@ class _CongratulationCardState extends State<CongratulationCard>
                 width: isMobile ? 230 : 290,
                 height: isMobile ? 150 : 180,
                 decoration: BoxDecoration(
-                  color: const Color(0xFF8B0000),
-                  borderRadius: BorderRadius.circular(6),
+                  color: const Color(0xFF722F37), // Muted burgundy envelope
+                  borderRadius: BorderRadius.circular(8),
+                  border: Border.all(
+                    color: const Color(0xFFB69A68),
+                    width: 1.2,
+                  ),
                   boxShadow: [
                     BoxShadow(
-                      color: const Color(0xFF4A0A10).withValues(alpha: 0.35),
+                      color: const Color(0xFF722F37).withValues(alpha: 0.30),
                       blurRadius: 18,
                       offset: const Offset(0, 10),
                     ),
@@ -606,11 +623,11 @@ class _CongratulationCardState extends State<CongratulationCard>
                           ),
                           Text(
                             "OPEN",
-                            style: GoogleFonts.comicNeue(
-                              fontSize: isMobile ? 14 : 17,
+                            style: GoogleFonts.plusJakartaSans(
+                              fontSize: isMobile ? 12 : 14,
                               fontWeight: FontWeight.w800,
                               letterSpacing: 1.5,
-                              color: const Color(0xFF8B0000),
+                              color: const Color(0xFF722F37),
                             ),
                           ),
                         ],
@@ -627,7 +644,7 @@ class _CongratulationCardState extends State<CongratulationCard>
             "tap the heart to reveal your gift ♡",
             style: GoogleFonts.caveat(
               fontSize: isMobile ? 18 : 22,
-              color: const Color(0xFF8B1E1E),
+              color: const Color(0xFF80604B),
             ),
           ),
         ],
@@ -686,12 +703,14 @@ class _CongratulationCardState extends State<CongratulationCard>
                   vertical: isMobile ? 9 : 12,
                 ),
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  gradient: const LinearGradient(
+                    colors: [Color(0xFF9E4B57), Color(0xFF722F37)],
+                  ),
                   borderRadius: BorderRadius.circular(24),
-                  border: Border.all(color: const Color(0xFF8B0000), width: 1.8),
+                  border: Border.all(color: const Color(0xFFE2C89A), width: 1.2),
                   boxShadow: [
                     BoxShadow(
-                      color: const Color(0xFF8B0000).withValues(alpha: 0.16),
+                      color: const Color(0xFF722F37).withValues(alpha: 0.25),
                       blurRadius: 8,
                       offset: const Offset(0, 2),
                     ),
@@ -699,10 +718,10 @@ class _CongratulationCardState extends State<CongratulationCard>
                 ),
                 child: Text(
                   "next",
-                  style: GoogleFonts.comicNeue(
-                    fontSize: isMobile ? 16 : 19,
+                  style: GoogleFonts.plusJakartaSans(
+                    fontSize: isMobile ? 14 : 16,
                     fontWeight: FontWeight.w700,
-                    color: const Color(0xFF8B0000),
+                    color: Colors.white,
                   ),
                 ),
               ),
@@ -731,10 +750,10 @@ class _CongratulationCardState extends State<CongratulationCard>
           Text(
             "Hugging you through my phone",
             textAlign: TextAlign.center,
-            style: GoogleFonts.comicNeue(
-              fontSize: isMobile ? 24 : 32,
+            style: GoogleFonts.plusJakartaSans(
+              fontSize: isMobile ? 20 : 26,
               fontWeight: FontWeight.w700,
-              color: const Color(0xFF1B1B1B),
+              color: const Color(0xFF282522),
             ),
           ),
           SizedBox(height: isMobile ? 12 : 18),
@@ -746,7 +765,7 @@ class _CongratulationCardState extends State<CongratulationCard>
               borderRadius: BorderRadius.circular(12),
               boxShadow: [
                 BoxShadow(
-                  color: Colors.black.withValues(alpha: 0.1),
+                  color: const Color(0xFF3D271D).withValues(alpha: 0.08),
                   blurRadius: 14,
                   offset: const Offset(0, 4),
                 ),
@@ -775,12 +794,14 @@ class _CongratulationCardState extends State<CongratulationCard>
                   vertical: isMobile ? 9 : 12,
                 ),
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  gradient: const LinearGradient(
+                    colors: [Color(0xFF9E4B57), Color(0xFF722F37)],
+                  ),
                   borderRadius: BorderRadius.circular(24),
-                  border: Border.all(color: const Color(0xFF8B0000), width: 1.8),
+                  border: Border.all(color: const Color(0xFFE2C89A), width: 1.2),
                   boxShadow: [
                     BoxShadow(
-                      color: const Color(0xFF8B0000).withValues(alpha: 0.16),
+                      color: const Color(0xFF722F37).withValues(alpha: 0.25),
                       blurRadius: 8,
                       offset: const Offset(0, 2),
                     ),
@@ -788,10 +809,10 @@ class _CongratulationCardState extends State<CongratulationCard>
                 ),
                 child: Text(
                   "next",
-                  style: GoogleFonts.comicNeue(
-                    fontSize: isMobile ? 16 : 19,
+                  style: GoogleFonts.plusJakartaSans(
+                    fontSize: isMobile ? 14 : 16,
                     fontWeight: FontWeight.w700,
-                    color: const Color(0xFF8B0000),
+                    color: Colors.white,
                   ),
                 ),
               ),
@@ -820,10 +841,10 @@ class _CongratulationCardState extends State<CongratulationCard>
           Text(
             "Flowers for you cutie",
             textAlign: TextAlign.center,
-            style: GoogleFonts.comicNeue(
-              fontSize: isMobile ? 24 : 32,
+            style: GoogleFonts.plusJakartaSans(
+              fontSize: isMobile ? 20 : 26,
               fontWeight: FontWeight.w700,
-              color: const Color(0xFF1B1B1B),
+              color: const Color(0xFF282522),
             ),
           ),
           SizedBox(height: isMobile ? 12 : 18),
@@ -835,7 +856,7 @@ class _CongratulationCardState extends State<CongratulationCard>
               borderRadius: BorderRadius.circular(12),
               boxShadow: [
                 BoxShadow(
-                  color: Colors.black.withValues(alpha: 0.1),
+                  color: const Color(0xFF3D271D).withValues(alpha: 0.08),
                   blurRadius: 14,
                   offset: const Offset(0, 4),
                 ),
@@ -864,12 +885,14 @@ class _CongratulationCardState extends State<CongratulationCard>
                   vertical: isMobile ? 9 : 12,
                 ),
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  gradient: const LinearGradient(
+                    colors: [Color(0xFF9E4B57), Color(0xFF722F37)],
+                  ),
                   borderRadius: BorderRadius.circular(24),
-                  border: Border.all(color: const Color(0xFF8B0000), width: 1.8),
+                  border: Border.all(color: const Color(0xFFE2C89A), width: 1.2),
                   boxShadow: [
                     BoxShadow(
-                      color: const Color(0xFF8B0000).withValues(alpha: 0.16),
+                      color: const Color(0xFF722F37).withValues(alpha: 0.25),
                       blurRadius: 8,
                       offset: const Offset(0, 2),
                     ),
@@ -877,10 +900,10 @@ class _CongratulationCardState extends State<CongratulationCard>
                 ),
                 child: Text(
                   "next",
-                  style: GoogleFonts.comicNeue(
-                    fontSize: isMobile ? 16 : 19,
+                  style: GoogleFonts.plusJakartaSans(
+                    fontSize: isMobile ? 14 : 16,
                     fontWeight: FontWeight.w700,
-                    color: const Color(0xFF8B0000),
+                    color: Colors.white,
                   ),
                 ),
               ),
@@ -912,7 +935,7 @@ class _CongratulationCardState extends State<CongratulationCard>
             style: GoogleFonts.greatVibes(
               fontSize: isMobile ? 38 : 52,
               fontWeight: FontWeight.w400,
-              color: const Color(0xFF8B0000),
+              color: const Color(0xFF722F37),
             ),
           ),
           const SizedBox(height: 8),
@@ -941,19 +964,20 @@ class _CongratulationCardState extends State<CongratulationCard>
                   child: Container(
                     padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 5),
                     decoration: BoxDecoration(
-                      color: const Color(0xFF4CAF50),
+                      color: const Color(0xFF722F37),
                       borderRadius: BorderRadius.circular(20),
+                      border: Border.all(color: const Color(0xFFB69A68), width: 1.2),
                       boxShadow: [
                         BoxShadow(
-                          color: Colors.black.withValues(alpha: 0.2),
+                          color: const Color(0xFF722F37).withValues(alpha: 0.3),
                           blurRadius: 8,
                         ),
                       ],
                     ),
                     child: Text(
                       "✨ WISH GRANTED! ✨",
-                      style: GoogleFonts.comicNeue(
-                        fontSize: 13,
+                      style: GoogleFonts.plusJakartaSans(
+                        fontSize: 12,
                         fontWeight: FontWeight.w800,
                         color: Colors.white,
                         letterSpacing: 1.0,
@@ -972,10 +996,10 @@ class _CongratulationCardState extends State<CongratulationCard>
               children: [
                 Text(
                   "Make a wish",
-                  style: GoogleFonts.comicNeue(
-                    fontSize: isMobile ? 18 : 22,
+                  style: GoogleFonts.caveat(
+                    fontSize: isMobile ? 22 : 27,
                     fontWeight: FontWeight.w700,
-                    color: const Color(0xFF8B0000),
+                    color: const Color(0xFF4A3228),
                   ),
                 ),
                 const SizedBox(width: 14),
@@ -988,12 +1012,14 @@ class _CongratulationCardState extends State<CongratulationCard>
                       vertical: isMobile ? 7 : 10,
                     ),
                     decoration: BoxDecoration(
-                      color: Colors.white,
+                      gradient: const LinearGradient(
+                        colors: [Color(0xFF9E4B57), Color(0xFF722F37)],
+                      ),
                       borderRadius: BorderRadius.circular(24),
-                      border: Border.all(color: const Color(0xFF8B0000), width: 1.8),
+                      border: Border.all(color: const Color(0xFFE2C89A), width: 1.2),
                       boxShadow: [
                         BoxShadow(
-                          color: const Color(0xFF8B0000).withValues(alpha: 0.18),
+                          color: const Color(0xFF722F37).withValues(alpha: 0.25),
                           blurRadius: 8,
                           offset: const Offset(0, 2),
                         ),
@@ -1001,10 +1027,10 @@ class _CongratulationCardState extends State<CongratulationCard>
                     ),
                     child: Text(
                       "Blow",
-                      style: GoogleFonts.comicNeue(
-                        fontSize: isMobile ? 15 : 18,
+                      style: GoogleFonts.plusJakartaSans(
+                        fontSize: isMobile ? 14 : 16,
                         fontWeight: FontWeight.w800,
-                        color: const Color(0xFF1B1B1B),
+                        color: Colors.white,
                       ),
                     ),
                   ),
@@ -1019,15 +1045,15 @@ class _CongratulationCardState extends State<CongratulationCard>
                 fontSize: isMobile ? 15 : 18,
                 fontStyle: FontStyle.italic,
                 fontWeight: FontWeight.w600,
-                color: const Color(0xFF2A2A2A),
+                color: const Color(0xFF282522),
               ),
             ),
             const SizedBox(height: 14),
             OutlinedButton(
               onPressed: _nextStep,
               style: OutlinedButton.styleFrom(
-                foregroundColor: const Color(0xFF8B0000),
-                side: const BorderSide(color: Color(0xFF8B0000), width: 1.5),
+                foregroundColor: const Color(0xFF722F37),
+                side: const BorderSide(color: Color(0xFF722F37), width: 1.4),
                 padding: EdgeInsets.symmetric(
                   horizontal: isMobile ? 22 : 30,
                   vertical: isMobile ? 9 : 12,
@@ -1278,9 +1304,9 @@ class _GinghamBorderPainter extends CustomPainter {
     if (size.isEmpty || size.width <= 0 || size.height <= 0) return;
     const double tileSize = 12.0;
 
-    final redPaint = Paint()..color = const Color(0xFFD32F2F);
-    final pinkPaint = Paint()..color = const Color(0xFFFFCDD2);
-    final whitePaint = Paint()..color = Colors.white;
+    final rosePaint = Paint()..color = const Color(0xFFD7A6A1); // Soft dusty rose
+    final peachPaint = Paint()..color = const Color(0xFFFFF2EB); // Muted peach cream
+    final creamPaint = Paint()..color = const Color(0xFFFFF9F1); // Pure cream
 
     final int cols = (size.width / tileSize).ceil();
     final int rows = (size.height / tileSize).ceil();
@@ -1289,9 +1315,9 @@ class _GinghamBorderPainter extends CustomPainter {
       for (int c = 0; c < cols; c++) {
         final rect = Rect.fromLTWH(c * tileSize, r * tileSize, tileSize, tileSize);
         if (r % 2 == 0) {
-          canvas.drawRect(rect, c % 2 == 0 ? redPaint : pinkPaint);
+          canvas.drawRect(rect, c % 2 == 0 ? rosePaint : peachPaint);
         } else {
-          canvas.drawRect(rect, c % 2 == 0 ? pinkPaint : whitePaint);
+          canvas.drawRect(rect, c % 2 == 0 ? peachPaint : creamPaint);
         }
       }
     }
@@ -1309,7 +1335,7 @@ class _GraphPaperPainter extends CustomPainter {
     const double gridSize = 18.0;
 
     final linePaint = Paint()
-      ..color = const Color(0xFFE2E7EE)
+      ..color = const Color(0xFFF1EAE2)
       ..strokeWidth = 0.8;
 
     for (double x = 0; x <= size.width; x += gridSize) {
@@ -1334,11 +1360,11 @@ class _CornerStar extends StatelessWidget {
     return Text(
       "★",
       style: TextStyle(
-        fontSize: 26,
-        color: const Color(0xFF8B0000).withValues(alpha: 0.85),
+        fontSize: 22,
+        color: const Color(0xFFB69A68).withValues(alpha: 0.85), // Antique gold star
         shadows: [
           Shadow(
-            color: Colors.black.withValues(alpha: 0.15),
+            color: const Color(0xFF3D271D).withValues(alpha: 0.10),
             blurRadius: 4,
             offset: const Offset(1, 2),
           ),
@@ -1356,12 +1382,12 @@ class _TopBuntingBannerPainter extends CustomPainter {
     if (size.isEmpty || size.width <= 0 || size.height <= 0) return;
 
     final linePaint = Paint()
-      ..color = const Color(0xFF990000)
-      ..strokeWidth = 1.4
+      ..color = const Color(0xFF722F37)
+      ..strokeWidth = 1.3
       ..style = PaintingStyle.stroke;
 
     final fillPaint = Paint()
-      ..color = const Color(0xFFFFEBEE)
+      ..color = const Color(0xFFFBF0ED)
       ..style = PaintingStyle.fill;
 
     final bannerW = min(size.width * 0.42, 140.0);

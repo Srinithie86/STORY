@@ -21,6 +21,7 @@ import 'package:our_love_story/widgets/who_is_he_movie_credits.dart';
 import 'package:our_love_story/widgets/congratulation_card.dart';
 import 'package:our_love_story/widgets/romantic_flower_greeting_card.dart';
 import 'package:our_love_story/widgets/interactive_envelope.dart';
+import 'package:our_love_story/widgets/boyfriend_birthday_calendar_hero.dart';
 
 void main() {
   const mobileSizes = [
@@ -51,14 +52,16 @@ void main() {
         'LoveLetterSection': LoveLetterSection(),
         'StoryTimeline': StoryTimeline(),
         'BirthdayRevealSection': const BirthdayRevealSection(),
+        'InteractiveCakeCuttingWidget': const InteractiveCakeCuttingWidget(),
+        'BoyfriendBirthdayCalendarHero': const BoyfriendBirthdayCalendarHero(),
         'ForeverArchiveSection': ForeverArchiveSection(),
-        'FinalRevealSection': const FinalRevealSection(),
+        'WhoIsHeMovieCreditsSection': const WhoIsHeMovieCreditsSection(),
         'KittenDeliveryService': const KittenDeliveryService(isMobile: true),
         'BirthdayCarTrackCard': const BirthdayCarTrackCard(),
-        'WhoIsHeMovieCreditsSection': const WhoIsHeMovieCreditsSection(),
         'CongratulationCard': const CongratulationCard(),
         'RomanticFlowerGreetingCard': const RomanticFlowerGreetingCard(),
         'InteractiveEnvelope': InteractiveEnvelope(onOpen: () {}, isOpen: false),
+        'FinalRevealSection': const FinalRevealSection(),
       };
 
       for (final entry in widgetsToTest.entries) {
@@ -74,7 +77,7 @@ void main() {
         await tester.pump(const Duration(milliseconds: 200));
         final ex = tester.takeException();
         if (ex != null) {
-          debugPrint('>>> OVERFLOW IN ${entry.key} at ${size.width}x${size.height}: $ex');
+          debugPrint('>>> OVERFLOW IN ${entry.key}: $ex');
         }
         expect(ex, isNull, reason: '${entry.key} overflowed at ${size.width}x${size.height}');
       }

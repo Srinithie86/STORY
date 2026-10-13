@@ -171,7 +171,17 @@ class _StoryHomePageState extends State<StoryHomePage> {
                       RepaintBoundary(child: ForeverArchiveSection(key: _foreverKey)),
 
                       // 13 — FINAL REVEAL & FOOTER
-                      const RepaintBoundary(child: FinalRevealSection()),
+                      RepaintBoundary(
+                        child: FinalRevealSection(
+                          onReplayStory: () {
+                            _scrollController.animateTo(
+                              0.0,
+                              duration: const Duration(milliseconds: 950),
+                              curve: Curves.easeInOutCubic,
+                            );
+                          },
+                        ),
+                      ),
                     ],
                   ),
                 ),

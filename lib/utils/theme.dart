@@ -2,6 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class AppTheme {
+  // Global Design System Colors
+  static const Color warmIvory = Color(0xFFF7F1E8);
+  static const Color softCream = Color(0xFFFFF9F1);
+  static const Color dustyRose = Color(0xFFD7A6A1);
+  static const Color mutedBurgundy = Color(0xFF722F37);
+  static const Color warmBrown = Color(0xFF80604B);
+  static const Color antiqueGold = Color(0xFFB69A68);
+  static const Color charcoalText = Color(0xFF282522);
+  static const Color softBlush = Color(0xFFFDF6F5);
+  static const Color lightLavender = Color(0xFFF4EFF6);
+
   static const Color primaryBackground = Color(0xFFFAF7F2); // Warm Linen Off-White Background
   static const Color darkMaroonAccent = Color(0xFF420008); // Deep Dark Wine Maroon Accent for featured UI
   static const Color warmPaper = Color(0xFFFFFFFF); // Clean Crisp White Paper

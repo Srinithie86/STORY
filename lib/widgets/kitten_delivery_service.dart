@@ -40,7 +40,7 @@ class _KittenDeliveryServiceState extends State<KittenDeliveryService>
       "emoji": "🎀",
       "role": "Floral Courier",
       "image": "assets/photos/cat_flowers_bow.png",
-      "accentColor": Color(0xFFE91E63),
+      "accentColor": const Color(0xFFC97A84), // Soft dusty rose
       "badge": "FRESH BLOOMS",
       "cargo": "Hand-picked Pink Roses & Frangipani Bouquet",
       "cargoIcon": "🌸",
@@ -57,7 +57,7 @@ class _KittenDeliveryServiceState extends State<KittenDeliveryService>
       "emoji": "🏎️",
       "role": "Speedster Courier",
       "image": "assets/photos/cat_hotwheels_strawberries.png",
-      "accentColor": Color(0xFFFF5722),
+      "accentColor": const Color(0xFFD48B5E), // Warm caramel peach
       "badge": "EXPRESS 200 MPH",
       "cargo": "Hot Wheels GT Twin Turbo + Dipped Strawberries",
       "cargoIcon": "🏎️🍓",
@@ -74,7 +74,7 @@ class _KittenDeliveryServiceState extends State<KittenDeliveryService>
       "emoji": "🎁",
       "role": "Surprise Vault",
       "image": "assets/photos/cat_tulips_giftbox.png",
-      "accentColor": Color(0xFFD4AF37),
+      "accentColor": const Color(0xFFB89248), // Antique honey gold
       "badge": "TOP SECRET VAULT",
       "cargo": "10,000+ Fight Apology & Cuddle Vouchers",
       "cargoIcon": "🎟️❤️",
@@ -91,7 +91,7 @@ class _KittenDeliveryServiceState extends State<KittenDeliveryService>
       "emoji": "🎂",
       "role": "Birthday Squad",
       "image": "assets/photos/birthday_kitten.jpg",
-      "accentColor": Color(0xFF8E24AA),
+      "accentColor": const Color(0xFF91515E), // Muted berry burgundy
       "badge": "VIP BIRTHDAY",
       "cargo": "Midnight Birthday Cake with Golden Sprinkles",
       "cargoIcon": "🎂✨",
@@ -206,21 +206,21 @@ class _KittenDeliveryServiceState extends State<KittenDeliveryService>
       constraints: const BoxConstraints(maxWidth: 820),
       margin: const EdgeInsets.symmetric(vertical: 24),
       decoration: BoxDecoration(
-        color: const Color(0xFFFFFDF9), // Warm boutique luxury ivory parchment
+        color: const Color(0xFFFFF9F1), // Soft boutique cream warm ivory
         borderRadius: BorderRadius.circular(24),
         border: Border.all(
-          color: const Color(0xFFE8D8C8),
+          color: const Color(0xFFE8DDD2), // Soft caramel/biscuit border
           width: 1.5,
         ),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withValues(alpha: 0.35),
-            blurRadius: 32,
-            offset: const Offset(0, 16),
+            color: const Color(0xFF3D271D).withValues(alpha: 0.08),
+            blurRadius: 28,
+            offset: const Offset(0, 12),
           ),
           BoxShadow(
-            color: const Color(0xFFD4AF37).withValues(alpha: 0.15),
-            blurRadius: 20,
+            color: const Color(0xFFB69A68).withValues(alpha: 0.06),
+            blurRadius: 14,
             spreadRadius: 1,
           ),
         ],
@@ -245,7 +245,7 @@ class _KittenDeliveryServiceState extends State<KittenDeliveryService>
               right: -25,
               bottom: -25,
               child: Opacity(
-                opacity: 0.04,
+                opacity: 0.03,
                 child: Text(
                   "🐾",
                   style: TextStyle(fontSize: 180, color: current["accentColor"] as Color),
@@ -330,10 +330,10 @@ class _KittenDeliveryServiceState extends State<KittenDeliveryService>
             Container(
               padding: const EdgeInsets.all(7),
               decoration: BoxDecoration(
-                color: const Color(0xFFFFECEE),
+                color: const Color(0xFFFFF2EB),
                 shape: BoxShape.circle,
                 border: Border.all(
-                  color: const Color(0xFFE57373),
+                  color: const Color(0xFFDEBAA0),
                   width: 1.2,
                 ),
               ),
@@ -351,14 +351,14 @@ class _KittenDeliveryServiceState extends State<KittenDeliveryService>
                         fontSize: isMobile ? 12 : 13.5,
                         letterSpacing: 2.0,
                         fontWeight: FontWeight.w900,
-                        color: const Color(0xFF6A1A24),
+                        color: const Color(0xFF4A3228), // Restrained chocolate-brown
                       ),
                     ),
                     const SizedBox(width: 6),
                     Container(
                       padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                       decoration: BoxDecoration(
-                        color: const Color(0xFFFCE4EC),
+                        color: const Color(0xFFF9ECE9),
                         borderRadius: BorderRadius.circular(6),
                       ),
                       child: Text(
@@ -366,7 +366,7 @@ class _KittenDeliveryServiceState extends State<KittenDeliveryService>
                         style: GoogleFonts.plusJakartaSans(
                           fontSize: 8.5,
                           fontWeight: FontWeight.w800,
-                          color: const Color(0xFFC2185B),
+                          color: const Color(0xFF722F37), // Muted burgundy
                           letterSpacing: 0.8,
                         ),
                       ),
@@ -380,7 +380,7 @@ class _KittenDeliveryServiceState extends State<KittenDeliveryService>
                     fontSize: 8.5,
                     letterSpacing: 1.0,
                     fontWeight: FontWeight.w600,
-                    color: const Color(0xFF8C7A70),
+                    color: const Color(0xFF80604B), // Warm brown
                   ),
                 ),
               ],
@@ -395,15 +395,15 @@ class _KittenDeliveryServiceState extends State<KittenDeliveryService>
           child: Container(
             padding: const EdgeInsets.symmetric(horizontal: 11, vertical: 6),
             decoration: BoxDecoration(
-              color: const Color(0xFFFFF0F3),
+              color: const Color(0xFFFFF4EE),
               borderRadius: BorderRadius.circular(20),
               border: Border.all(
-                color: const Color(0xFFFFB2C1),
+                color: const Color(0xFFE4C3AB),
                 width: 1.2,
               ),
               boxShadow: [
                 BoxShadow(
-                  color: const Color(0xFFFFB2C1).withValues(alpha: 0.25),
+                  color: const Color(0xFF80604B).withValues(alpha: 0.10),
                   blurRadius: 8,
                   offset: const Offset(0, 2),
                 ),
@@ -420,7 +420,7 @@ class _KittenDeliveryServiceState extends State<KittenDeliveryService>
                     fontSize: 10,
                     fontWeight: FontWeight.w800,
                     letterSpacing: 0.6,
-                    color: const Color(0xFFB71C1C),
+                    color: const Color(0xFF722F37),
                   ),
                 ),
               ],
@@ -438,10 +438,10 @@ class _KittenDeliveryServiceState extends State<KittenDeliveryService>
       width: double.infinity,
       padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
       decoration: BoxDecoration(
-        color: const Color(0xFFFFF8E7),
+        color: const Color(0xFFFFF8EE),
         borderRadius: BorderRadius.circular(14),
         border: Border.all(
-          color: const Color(0xFFD4AF37),
+          color: const Color(0xFFB69A68),
           width: 1.4,
         ),
       ),
@@ -508,18 +508,18 @@ class _KittenDeliveryServiceState extends State<KittenDeliveryService>
                   vertical: isMobile ? 6 : 8,
                 ),
                 decoration: BoxDecoration(
-                  color: isSelected ? accent.withValues(alpha: 0.10) : Colors.white,
+                  color: isSelected ? accent.withValues(alpha: 0.12) : const Color(0xFFFFFDF9),
                   borderRadius: BorderRadius.circular(18),
                   border: Border.all(
-                    color: isSelected ? accent : const Color(0xFFE8DCD1),
+                    color: isSelected ? accent : const Color(0xFFEADFD4),
                     width: isSelected ? 1.8 : 1.0,
                   ),
                   boxShadow: isSelected
                       ? [
                           BoxShadow(
-                            color: accent.withValues(alpha: 0.20),
-                            blurRadius: 10,
-                            offset: const Offset(0, 3),
+                            color: accent.withValues(alpha: 0.16),
+                            blurRadius: 8,
+                            offset: const Offset(0, 2),
                           ),
                         ]
                       : null,
@@ -582,15 +582,15 @@ class _KittenDeliveryServiceState extends State<KittenDeliveryService>
       width: double.infinity,
       padding: EdgeInsets.all(isMobile ? 14 : 22),
       decoration: BoxDecoration(
-        color: const Color(0xFFFAF6F0), // Soft warm cream card
+        color: const Color(0xFFFFFDF9), // Warm ivory parchment
         borderRadius: BorderRadius.circular(20),
         border: Border.all(
-          color: const Color(0xFFE4D5C5),
+          color: const Color(0xFFE8DDD2),
           width: 1.4,
         ),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withValues(alpha: 0.06),
+            color: const Color(0xFF3D271D).withValues(alpha: 0.05),
             blurRadius: 16,
             offset: const Offset(0, 6),
           ),
@@ -742,17 +742,17 @@ class _KittenDeliveryServiceState extends State<KittenDeliveryService>
       width: double.infinity,
       padding: EdgeInsets.all(isMobile ? 12 : 16),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: const Color(0xFFFCFAF6), // Soft warm ivory
         borderRadius: BorderRadius.circular(16),
         border: Border.all(
-          color: const Color(0xFFE8DDD2),
+          color: const Color(0xFFEAE0D5),
           width: 1.2,
         ),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withValues(alpha: 0.04),
-            blurRadius: 10,
-            offset: const Offset(0, 3),
+            color: const Color(0xFF3D271D).withValues(alpha: 0.03),
+            blurRadius: 8,
+            offset: const Offset(0, 2),
           ),
         ],
       ),
@@ -776,7 +776,7 @@ class _KittenDeliveryServiceState extends State<KittenDeliveryService>
                             fontSize: 8.5,
                             letterSpacing: 1.2,
                             fontWeight: FontWeight.w700,
-                            color: const Color(0xFF8C7A70),
+                            color: const Color(0xFF80604B),
                           ),
                         ),
                         const SizedBox(height: 2),
@@ -785,7 +785,7 @@ class _KittenDeliveryServiceState extends State<KittenDeliveryService>
                           style: GoogleFonts.plusJakartaSans(
                             fontSize: isMobile ? 12 : 13.5,
                             fontWeight: FontWeight.w800,
-                            color: const Color(0xFF3E1D24),
+                            color: const Color(0xFF282522),
                           ),
                         ),
                         Text(
@@ -793,7 +793,7 @@ class _KittenDeliveryServiceState extends State<KittenDeliveryService>
                           style: GoogleFonts.plusJakartaSans(
                             fontSize: 10,
                             fontStyle: FontStyle.italic,
-                            color: const Color(0xFF8A6C58),
+                            color: const Color(0xFF80604B),
                           ),
                         ),
                       ],
@@ -804,10 +804,10 @@ class _KittenDeliveryServiceState extends State<KittenDeliveryService>
                   Container(
                     padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 5),
                     decoration: BoxDecoration(
-                      color: const Color(0xFFFFF4F6),
+                      color: const Color(0xFFFFF2EB),
                       borderRadius: BorderRadius.circular(6),
                       border: Border.all(
-                        color: const Color(0xFFE57373),
+                        color: const Color(0xFFDEBAA0),
                         width: 1,
                       ),
                     ),
@@ -819,7 +819,7 @@ class _KittenDeliveryServiceState extends State<KittenDeliveryService>
                           style: AppTheme.monoStyle(
                             fontSize: 7,
                             fontWeight: FontWeight.w800,
-                            color: const Color(0xFFC2185B),
+                            color: const Color(0xFF722F37),
                           ),
                         ),
                       ],
@@ -846,7 +846,7 @@ class _KittenDeliveryServiceState extends State<KittenDeliveryService>
                       style: GoogleFonts.plusJakartaSans(
                         fontSize: isMobile ? 10.5 : 11.5,
                         fontWeight: FontWeight.w800,
-                        color: const Color(0xFF5D2E18),
+                        color: const Color(0xFF5A3E2B),
                       ),
                     ),
                   ),
@@ -860,10 +860,10 @@ class _KittenDeliveryServiceState extends State<KittenDeliveryService>
                 width: double.infinity,
                 padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
                 decoration: BoxDecoration(
-                  color: const Color(0xFFFFFBF2), // Warm sandalwood parchment
+                  color: const Color(0xFFFFFDF7), // Warm sandalwood parchment
                   borderRadius: BorderRadius.circular(10),
                   border: Border.all(
-                    color: const Color(0xFFEFE2CE),
+                    color: const Color(0xFFEFE6DA),
                     width: 1,
                   ),
                 ),
@@ -872,8 +872,8 @@ class _KittenDeliveryServiceState extends State<KittenDeliveryService>
                   style: GoogleFonts.caveat(
                     fontSize: isMobile ? 16.5 : 18.5,
                     fontWeight: FontWeight.w700,
-                    color: const Color(0xFF2C1810),
-                    height: 1.25,
+                    color: const Color(0xFF382319),
+                    height: 1.28,
                   ),
                 ),
               ),
@@ -888,7 +888,7 @@ class _KittenDeliveryServiceState extends State<KittenDeliveryService>
                   style: GoogleFonts.caveat(
                     fontSize: isMobile ? 14 : 15.5,
                     fontWeight: FontWeight.w700,
-                    color: const Color(0xFF8C3848),
+                    color: const Color(0xFF722F37),
                   ),
                 ),
               ),
@@ -914,15 +914,15 @@ class _KittenDeliveryServiceState extends State<KittenDeliveryService>
                 child: Container(
                   padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                   decoration: BoxDecoration(
-                    color: const Color(0xFFB71C1C).withValues(alpha: 0.92),
+                    color: const Color(0xFF722F37).withValues(alpha: 0.94),
                     borderRadius: BorderRadius.circular(8),
                     border: Border.all(
-                      color: const Color(0xFFFFD54F),
+                      color: const Color(0xFFB69A68),
                       width: 1.5,
                     ),
                     boxShadow: [
                       BoxShadow(
-                        color: const Color(0xFFB71C1C).withValues(alpha: 0.4),
+                        color: const Color(0xFF722F37).withValues(alpha: 0.35),
                         blurRadius: 10,
                         offset: const Offset(0, 4),
                       ),
@@ -966,7 +966,7 @@ class _KittenDeliveryServiceState extends State<KittenDeliveryService>
     bool isMobile,
   ) {
     if (!isDelivered) {
-      // Unclaimed State: Big Juicy Button to Accept Delivery
+      // Unclaimed State: Button to Accept Delivery
       return InkWell(
         onTap: () => _acceptDelivery(_selectedCourier, current["reward"] as String),
         borderRadius: BorderRadius.circular(30),
@@ -984,18 +984,18 @@ class _KittenDeliveryServiceState extends State<KittenDeliveryService>
             decoration: BoxDecoration(
               gradient: const LinearGradient(
                 colors: [
-                  Color(0xFFC2185B), // Romantic Raspberry
-                  Color(0xFF880E4F), // Deep Wine
+                  Color(0xFF9E4B57), // Soft dusty burgundy
+                  Color(0xFF722F37), // Muted burgundy
                 ],
               ),
               borderRadius: BorderRadius.circular(30),
               border: Border.all(
-                color: const Color(0xFFFFD54F),
+                color: const Color(0xFFE2C89A), // Antique gold hairline
                 width: 1.4,
               ),
               boxShadow: [
                 BoxShadow(
-                  color: const Color(0xFFC2185B).withValues(alpha: 0.35),
+                  color: const Color(0xFF722F37).withValues(alpha: 0.28),
                   blurRadius: 16,
                   offset: const Offset(0, 6),
                 ),
@@ -1034,17 +1034,17 @@ class _KittenDeliveryServiceState extends State<KittenDeliveryService>
             width: double.infinity,
             padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
             decoration: BoxDecoration(
-              color: const Color(0xFFE8F5E9),
+              color: const Color(0xFFF1F8F2),
               borderRadius: BorderRadius.circular(12),
               border: Border.all(
-                color: const Color(0xFF81C784),
+                color: const Color(0xFFA5D6A7),
                 width: 1.2,
               ),
             ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Icon(Icons.check_circle_rounded, color: Color(0xFF2E7D32), size: 16),
+                const Icon(Icons.check_circle_rounded, color: Color(0xFF2E6B38), size: 16),
                 const SizedBox(width: 8),
                 Text(
                   "CARGO CLAIMED: ${current["reward"]} CREDITED TO SELVA!",
@@ -1071,10 +1071,10 @@ class _KittenDeliveryServiceState extends State<KittenDeliveryService>
                   child: Container(
                     padding: const EdgeInsets.symmetric(vertical: 11),
                     decoration: BoxDecoration(
-                      color: const Color(0xFFFFF0F3),
+                      color: const Color(0xFFFFF4EE),
                       borderRadius: BorderRadius.circular(24),
                       border: Border.all(
-                        color: const Color(0xFFFFB2C1),
+                        color: const Color(0xFFE4C3AB),
                         width: 1.2,
                       ),
                     ),
@@ -1088,7 +1088,7 @@ class _KittenDeliveryServiceState extends State<KittenDeliveryService>
                           style: GoogleFonts.plusJakartaSans(
                             fontSize: isMobile ? 11 : 12,
                             fontWeight: FontWeight.w700,
-                            color: const Color(0xFFB71C1C),
+                            color: const Color(0xFF722F37),
                           ),
                         ),
                       ],
@@ -1105,7 +1105,7 @@ class _KittenDeliveryServiceState extends State<KittenDeliveryService>
                     padding: const EdgeInsets.symmetric(vertical: 11),
                     decoration: BoxDecoration(
                       gradient: const LinearGradient(
-                        colors: [Color(0xFF4A148C), Color(0xFF311B92)],
+                        colors: [Color(0xFF5A3E2B), Color(0xFF442D1F)], // Restrained chocolate-brown
                       ),
                       borderRadius: BorderRadius.circular(24),
                     ),
@@ -1139,7 +1139,7 @@ class _KittenDeliveryServiceState extends State<KittenDeliveryService>
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        const Icon(Icons.verified, size: 12, color: Color(0xFFD4AF37)),
+        const Icon(Icons.verified, size: 12, color: Color(0xFFB69A68)),
         const SizedBox(width: 6),
         Flexible(
           child: Text(
@@ -1149,7 +1149,7 @@ class _KittenDeliveryServiceState extends State<KittenDeliveryService>
               fontSize: 9,
               letterSpacing: 0.6,
               fontWeight: FontWeight.w500,
-              color: const Color(0xFF8C7A70),
+              color: const Color(0xFF80604B),
             ),
           ),
         ),
@@ -1212,15 +1212,15 @@ class _FloatingParticlePainter extends CustomPainter {
   bool shouldRepaint(covariant CustomPainter oldDelegate) => true;
 }
 
-/// Vintage Airmail Stripe Painter (Red and Blue angled stripes)
+/// Vintage Airmail Stripe Painter (Soft Dusty Rose and Warm Caramel stripes)
 class _AirmailStripePainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
-    final redPaint = Paint()..color = const Color(0xFFE53935);
-    final bluePaint = Paint()..color = const Color(0xFF1E88E5);
-    final whitePaint = Paint()..color = const Color(0xFFFFFDF9);
+    final rosePaint = Paint()..color = const Color(0xFFD7A6A1);
+    final caramelPaint = Paint()..color = const Color(0xFFCDB69A);
+    final creamPaint = Paint()..color = const Color(0xFFFFF9F1);
 
-    canvas.drawRect(Rect.fromLTWH(0, 0, size.width, size.height), whitePaint);
+    canvas.drawRect(Rect.fromLTWH(0, 0, size.width, size.height), creamPaint);
 
     const stripeWidth = 14.0;
     const stripeGap = 6.0;
@@ -1231,24 +1231,24 @@ class _AirmailStripePainter extends CustomPainter {
     for (int i = 0; i < count; i++) {
       double startX = i * totalPatternWidth;
 
-      // Red parallelogram
-      Path redPath = Path()
+      // Dusty rose parallelogram
+      Path rosePath = Path()
         ..moveTo(startX, 0)
         ..lineTo(startX + stripeWidth, 0)
         ..lineTo(startX + stripeWidth - 4, size.height)
         ..lineTo(startX - 4, size.height)
         ..close();
-      canvas.drawPath(redPath, redPaint);
+      canvas.drawPath(rosePath, rosePaint);
 
-      // Blue parallelogram
-      double blueStartX = startX + stripeWidth + stripeGap;
-      Path bluePath = Path()
-        ..moveTo(blueStartX, 0)
-        ..lineTo(blueStartX + stripeWidth, 0)
-        ..lineTo(blueStartX + stripeWidth - 4, size.height)
-        ..lineTo(blueStartX - 4, size.height)
+      // Warm caramel parallelogram
+      double caramelStartX = startX + stripeWidth + stripeGap;
+      Path caramelPath = Path()
+        ..moveTo(caramelStartX, 0)
+        ..lineTo(caramelStartX + stripeWidth, 0)
+        ..lineTo(caramelStartX + stripeWidth - 4, size.height)
+        ..lineTo(caramelStartX - 4, size.height)
         ..close();
-      canvas.drawPath(bluePath, bluePaint);
+      canvas.drawPath(caramelPath, caramelPaint);
     }
   }
 
