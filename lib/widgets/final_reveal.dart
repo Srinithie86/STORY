@@ -467,20 +467,22 @@ class _CinematicMovieEndCardState extends State<_CinematicMovieEndCard>
     return Container(
       width: double.infinity,
       decoration: BoxDecoration(
-        color: const Color(0xFF1F0C12), // Deep Twilight Burgundy
+        // Luminous Translucent Warm Cream Frosted Glass Veil:
+        // Background video & textures shine through continuously!
+        color: const Color(0xFFFFFDF9).withValues(alpha: 0.74),
         borderRadius: BorderRadius.circular(28),
         border: Border.all(
-          color: const Color(0xFFD4AF37).withValues(alpha: 0.70), // Antique Champagne Gold
-          width: 1.6,
+          color: const Color(0xFFD4AF37).withValues(alpha: 0.65), // Antique Champagne Gold
+          width: 1.8,
         ),
         boxShadow: [
           BoxShadow(
-            color: const Color(0xFF722F37).withValues(alpha: 0.35),
+            color: const Color(0xFF722F37).withValues(alpha: 0.12),
             blurRadius: 40,
             offset: const Offset(0, 16),
           ),
           BoxShadow(
-            color: Colors.black.withValues(alpha: 0.50),
+            color: Colors.black.withValues(alpha: 0.08),
             blurRadius: 24,
             offset: const Offset(0, 8),
           ),
@@ -515,18 +517,25 @@ class _CinematicMovieEndCardState extends State<_CinematicMovieEndCard>
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  // 2. Cinematic Clapperboard Header Pill
+                  // 2. Cinematic Clapperboard Header Pill in Warm Cream
                   FittedBox(
                     fit: BoxFit.scaleDown,
                     child: Container(
                       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6.5),
                       decoration: BoxDecoration(
-                        color: const Color(0xFF2E131B),
+                        color: const Color(0xFFFFF4EE).withValues(alpha: 0.92),
                         borderRadius: BorderRadius.circular(30),
                         border: Border.all(
-                          color: const Color(0xFFD4AF37).withValues(alpha: 0.70),
+                          color: const Color(0xFFD7A6A1),
                           width: 1.0,
                         ),
+                        boxShadow: [
+                          BoxShadow(
+                            color: const Color(0xFF722F37).withValues(alpha: 0.08),
+                            blurRadius: 8,
+                            offset: const Offset(0, 2),
+                          ),
+                        ],
                       ),
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
@@ -539,7 +548,7 @@ class _CinematicMovieEndCardState extends State<_CinematicMovieEndCard>
                               fontSize: isMobile ? 9.5 : 11,
                               letterSpacing: 2.2,
                               fontWeight: FontWeight.w800,
-                              color: const Color(0xFFE2C89A),
+                              color: const Color(0xFF722F37),
                             ),
                           ),
                           const SizedBox(width: 8),
@@ -550,22 +559,22 @@ class _CinematicMovieEndCardState extends State<_CinematicMovieEndCard>
                   ),
                   const SizedBox(height: 28),
 
-                  // 3. 35mm Widescreen Letterbox Film Still of Selva & Srinithi
+                  // 3. 35mm Gallery Framed Film Still of Selva & Srinithi
                   Container(
                     width: double.infinity,
                     constraints: BoxConstraints(
                       maxWidth: isMobile ? 340 : 540,
                     ),
                     decoration: BoxDecoration(
-                      color: Colors.black,
+                      color: const Color(0xFFFFF9F1),
                       borderRadius: BorderRadius.circular(18),
                       border: Border.all(
-                        color: const Color(0xFFB69A68).withValues(alpha: 0.6),
+                        color: const Color(0xFFD4AF37).withValues(alpha: 0.70),
                         width: 1.5,
                       ),
                       boxShadow: [
                         BoxShadow(
-                          color: Colors.black.withValues(alpha: 0.6),
+                          color: const Color(0xFF722F37).withValues(alpha: 0.12),
                           blurRadius: 20,
                           offset: const Offset(0, 10),
                         ),
@@ -578,7 +587,7 @@ class _CinematicMovieEndCardState extends State<_CinematicMovieEndCard>
                         children: [
                           // Letterbox Top Bar with Film Stamp
                           Container(
-                            color: const Color(0xFF0F0508),
+                            color: const Color(0xFFFFF2EC).withValues(alpha: 0.95),
                             padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
                             child: FittedBox(
                               fit: BoxFit.scaleDown,
@@ -590,7 +599,7 @@ class _CinematicMovieEndCardState extends State<_CinematicMovieEndCard>
                                     style: GoogleFonts.plusJakartaSans(
                                       fontSize: 8.5,
                                       letterSpacing: 1.5,
-                                      color: const Color(0xFFB69A68),
+                                      color: const Color(0xFF80604B),
                                       fontWeight: FontWeight.w700,
                                     ),
                                   ),
@@ -600,7 +609,7 @@ class _CinematicMovieEndCardState extends State<_CinematicMovieEndCard>
                                     style: GoogleFonts.plusJakartaSans(
                                       fontSize: 8.5,
                                       letterSpacing: 1.5,
-                                      color: const Color(0xFFE2C89A),
+                                      color: const Color(0xFF722F37),
                                       fontWeight: FontWeight.w700,
                                     ),
                                   ),
@@ -618,9 +627,9 @@ class _CinematicMovieEndCardState extends State<_CinematicMovieEndCard>
                               alignment: const Alignment(0, -0.2),
                               errorBuilder: (context, error, stackTrace) {
                                 return Container(
-                                  color: const Color(0xFF2C1016),
+                                  color: const Color(0xFFFFF2EC),
                                   child: const Center(
-                                    child: Icon(Icons.favorite, color: Colors.white, size: 36),
+                                    child: Icon(Icons.favorite, color: Color(0xFF722F37), size: 36),
                                   ),
                                 );
                               },
@@ -630,7 +639,7 @@ class _CinematicMovieEndCardState extends State<_CinematicMovieEndCard>
                           // Subtitle Dialogue Bar
                           Container(
                             width: double.infinity,
-                            color: const Color(0xFF0F0508),
+                            color: const Color(0xFFFFF2EC).withValues(alpha: 0.95),
                             padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
                             child: Text(
                               "“You made me realize what forever feels like.”",
@@ -639,13 +648,7 @@ class _CinematicMovieEndCardState extends State<_CinematicMovieEndCard>
                                 fontSize: isMobile ? 13 : 15,
                                 fontStyle: FontStyle.italic,
                                 fontWeight: FontWeight.w600,
-                                color: const Color(0xFFFFF9F1),
-                                shadows: [
-                                  Shadow(
-                                    color: Colors.black.withValues(alpha: 0.9),
-                                    blurRadius: 4,
-                                  ),
-                                ],
+                                color: const Color(0xFF380811),
                               ),
                             ),
                           ),
@@ -662,11 +665,11 @@ class _CinematicMovieEndCardState extends State<_CinematicMovieEndCard>
                     style: GoogleFonts.greatVibes(
                       fontSize: isMobile ? 44 : 58,
                       fontWeight: FontWeight.w400,
-                      color: const Color(0xFFE2C89A), // Warm Antique Gold
+                      color: const Color(0xFF4A0E17), // Rich Majestic Wine
                       shadows: [
                         Shadow(
-                          color: Colors.black.withValues(alpha: 0.6),
-                          blurRadius: 10,
+                          color: Colors.white.withValues(alpha: 0.95),
+                          blurRadius: 8,
                         ),
                       ],
                     ),
@@ -680,7 +683,7 @@ class _CinematicMovieEndCardState extends State<_CinematicMovieEndCard>
                       fontSize: isMobile ? 17 : 21,
                       fontStyle: FontStyle.italic,
                       fontWeight: FontWeight.w600,
-                      color: const Color(0xFFFFF4EE),
+                      color: const Color(0xFF282522),
                     ),
                   ),
                   const SizedBox(height: 20),
@@ -696,7 +699,7 @@ class _CinematicMovieEndCardState extends State<_CinematicMovieEndCard>
                         fontStyle: FontStyle.italic,
                         fontWeight: FontWeight.w700,
                         height: 1.45,
-                        color: const Color(0xFFFFE8E0),
+                        color: const Color(0xFF722F37),
                       ),
                     ),
                   ),
@@ -709,7 +712,7 @@ class _CinematicMovieEndCardState extends State<_CinematicMovieEndCard>
                       textAlign: TextAlign.center,
                       style: GoogleFonts.plusJakartaSans(
                         fontSize: isMobile ? 12 : 14,
-                        color: const Color(0xFFD7A6A1),
+                        color: const Color(0xFF4A3B32),
                         height: 1.6,
                         fontWeight: FontWeight.w500,
                       ),
@@ -722,24 +725,31 @@ class _CinematicMovieEndCardState extends State<_CinematicMovieEndCard>
                     textAlign: TextAlign.center,
                     style: GoogleFonts.caveat(
                       fontSize: isMobile ? 18 : 22,
-                      color: const Color(0xFFFF9EAA),
+                      color: const Color(0xFFC2185B),
                       fontWeight: FontWeight.w700,
                     ),
                   ),
                   const SizedBox(height: 32),
 
-                  // 6. Refined Film-Credit Style Block
+                  // 6. Refined Film-Credit Style Block in Warm Blush/Ivory
                   Container(
                     width: double.infinity,
                     constraints: const BoxConstraints(maxWidth: 640),
                     padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 16),
                     decoration: BoxDecoration(
-                      color: Colors.black.withValues(alpha: 0.35),
+                      color: const Color(0xFFFFF4EE).withValues(alpha: 0.88),
                       borderRadius: BorderRadius.circular(16),
                       border: Border.all(
-                        color: const Color(0xFFB69A68).withValues(alpha: 0.35),
+                        color: const Color(0xFFB69A68).withValues(alpha: 0.45),
                         width: 1.0,
                       ),
+                      boxShadow: [
+                        BoxShadow(
+                          color: const Color(0xFF722F37).withValues(alpha: 0.06),
+                          blurRadius: 10,
+                          offset: const Offset(0, 3),
+                        ),
+                      ],
                     ),
                     child: Wrap(
                       alignment: WrapAlignment.spaceAround,
@@ -761,7 +771,7 @@ class _CinematicMovieEndCardState extends State<_CinematicMovieEndCard>
                     spacing: 12,
                     runSpacing: 12,
                     children: [
-                      // Heartbeat Sender
+                      // Heartbeat Sender in Soft Rose Glass
                       GestureDetector(
                         onTap: _onSendHeartbeat,
                         child: AnimatedScale(
@@ -773,17 +783,17 @@ class _CinematicMovieEndCardState extends State<_CinematicMovieEndCard>
                               vertical: isMobile ? 11 : 13,
                             ),
                             decoration: BoxDecoration(
-                              color: _justTapped ? const Color(0xFF4A1822) : const Color(0xFF2E131B),
+                              color: _justTapped ? const Color(0xFFFFE0E6) : const Color(0xFFFFF0F3),
                               borderRadius: BorderRadius.circular(30),
                               border: Border.all(
                                 color: _justTapped
                                     ? const Color(0xFFFF4D6D)
-                                    : const Color(0xFFD4AF37).withValues(alpha: 0.65),
+                                    : const Color(0xFFD7A6A1),
                                 width: 1.2,
                               ),
                               boxShadow: [
                                 BoxShadow(
-                                  color: Colors.black.withValues(alpha: 0.25),
+                                  color: const Color(0xFFFF2D55).withValues(alpha: 0.12),
                                   blurRadius: 10,
                                   offset: const Offset(0, 3),
                                 ),
@@ -810,7 +820,7 @@ class _CinematicMovieEndCardState extends State<_CinematicMovieEndCard>
                                     style: GoogleFonts.plusJakartaSans(
                                       fontSize: isMobile ? 11 : 12.5,
                                       fontWeight: FontWeight.w700,
-                                      color: Colors.white,
+                                      color: const Color(0xFF722F37),
                                     ),
                                   ),
                                 ],
@@ -827,7 +837,7 @@ class _CinematicMovieEndCardState extends State<_CinematicMovieEndCard>
                           backgroundColor: const Color(0xFF722F37), // Muted Burgundy
                           foregroundColor: Colors.white,
                           elevation: 6,
-                          shadowColor: const Color(0xFF722F37).withValues(alpha: 0.50),
+                          shadowColor: const Color(0xFF722F37).withValues(alpha: 0.40),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(30),
                             side: const BorderSide(color: Color(0xFFE2C89A), width: 1.4),
@@ -859,7 +869,7 @@ class _CinematicMovieEndCardState extends State<_CinematicMovieEndCard>
                       Container(
                         width: isMobile ? 36 : 70,
                         height: 1,
-                        color: const Color(0xFFD4AF37).withValues(alpha: 0.35),
+                        color: const Color(0xFFD4AF37).withValues(alpha: 0.45),
                       ),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 14),
@@ -867,14 +877,14 @@ class _CinematicMovieEndCardState extends State<_CinematicMovieEndCard>
                           "◆",
                           style: TextStyle(
                             fontSize: 9,
-                            color: const Color(0xFFD4AF37).withValues(alpha: 0.8),
+                            color: const Color(0xFFB69A68),
                           ),
                         ),
                       ),
                       Container(
                         width: isMobile ? 36 : 70,
                         height: 1,
-                        color: const Color(0xFFD4AF37).withValues(alpha: 0.35),
+                        color: const Color(0xFFD4AF37).withValues(alpha: 0.45),
                       ),
                     ],
                   ),
@@ -887,7 +897,7 @@ class _CinematicMovieEndCardState extends State<_CinematicMovieEndCard>
                       fontSize: isMobile ? 12 : 14,
                       fontWeight: FontWeight.w800,
                       letterSpacing: 3.5,
-                      color: const Color(0xFFE2C89A),
+                      color: const Color(0xFF722F37),
                     ),
                   ),
                   const SizedBox(height: 4),
@@ -896,7 +906,7 @@ class _CinematicMovieEndCardState extends State<_CinematicMovieEndCard>
                     style: GoogleFonts.plusJakartaSans(
                       fontSize: isMobile ? 10 : 11.5,
                       letterSpacing: 1.6,
-                      color: const Color(0xFFD7A6A1),
+                      color: const Color(0xFF80604B),
                       fontWeight: FontWeight.w600,
                     ),
                   ),
@@ -920,7 +930,7 @@ class _CinematicMovieEndCardState extends State<_CinematicMovieEndCard>
             fontSize: isMobile ? 8.5 : 9.5,
             letterSpacing: 1.8,
             fontWeight: FontWeight.w800,
-            color: const Color(0xFFB69A68),
+            color: const Color(0xFF80604B),
           ),
         ),
         const SizedBox(height: 2),
@@ -929,7 +939,7 @@ class _CinematicMovieEndCardState extends State<_CinematicMovieEndCard>
           style: GoogleFonts.cormorantGaramond(
             fontSize: isMobile ? 13 : 15,
             fontWeight: FontWeight.w700,
-            color: const Color(0xFFFFF9F1),
+            color: const Color(0xFF722F37),
           ),
         ),
       ],
