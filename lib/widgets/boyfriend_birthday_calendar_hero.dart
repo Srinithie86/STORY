@@ -6,15 +6,15 @@ import '../models/memory.dart';
 import '../utils/responsive.dart';
 import 'photo_viewer.dart';
 
-/// Clean, Beautiful, and Responsive Relationship Calendar Hero
+/// Clean, Beautiful, and Intensely Romantic Relationship Calendar Hero
 /// Features:
-/// 1. Selvakumar Gym / Couple / Beach background photo shining through frosted glass veil.
-/// 2. Interactive Month navigation (< and >) with year and month heading.
+/// 1. Selvakumar Gym / Couple / Beach background photo visible through a delicate, luminous frosted glass veil.
+/// 2. Interactive Month navigation (< and >) with elegant calligraphic heading.
 /// 3. Strict seven-column calendar grid with Sun-Sat alignment.
 /// 4. October 13 birthday highlighting with glowing romantic lipstick kiss 💋 aesthetic & burst.
 /// 5. Restrained antique-gold indicator dots for dates with existing memories in StoryConfig.memories.
 /// 6. Date-specific memory details card showing actual memory title, caption, location, note & photo viewer.
-/// 7. Zero invented memories: displays respectful quiet message for dates without recorded memories.
+/// 7. Authentic romantic handwritten typography (Caveat + Great Vibes) with luminous shadows.
 class BoyfriendBirthdayCalendarHero extends StatefulWidget {
   final String gymPhotoPath;
   final int highlightDay; // 13 for Oct 13
@@ -182,7 +182,7 @@ class _BoyfriendBirthdayCalendarHeroState
       child: Container(
         width: double.infinity,
         constraints: BoxConstraints(
-          maxWidth: isMobile ? 380 : 520,
+          maxWidth: isMobile ? 380 : 490,
         ),
         margin: const EdgeInsets.symmetric(vertical: 24, horizontal: 16),
         decoration: BoxDecoration(
@@ -198,7 +198,7 @@ class _BoyfriendBirthdayCalendarHeroState
               offset: const Offset(0, 14),
             ),
             BoxShadow(
-              color: Colors.black.withValues(alpha: 0.12),
+              color: Colors.black.withValues(alpha: 0.14),
               blurRadius: 18,
               offset: const Offset(0, 6),
             ),
@@ -228,7 +228,7 @@ class _BoyfriendBirthdayCalendarHeroState
                 ),
               ),
 
-              // 2. Subtle warm gradient
+              // 2. Delicate ambient lighting gradient so photo colors stay vivid
               Positioned.fill(
                 child: Container(
                   decoration: BoxDecoration(
@@ -236,11 +236,11 @@ class _BoyfriendBirthdayCalendarHeroState
                       begin: Alignment.topCenter,
                       end: Alignment.bottomCenter,
                       colors: [
-                        Colors.black.withValues(alpha: 0.15),
+                        Colors.black.withValues(alpha: 0.10),
                         Colors.transparent,
-                        Colors.black.withValues(alpha: 0.35),
+                        Colors.black.withValues(alpha: 0.28),
                       ],
-                      stops: const [0.0, 0.40, 1.0],
+                      stops: const [0.0, 0.45, 1.0],
                     ),
                   ),
                 ),
@@ -260,7 +260,7 @@ class _BoyfriendBirthdayCalendarHeroState
                   child: Container(
                     padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                     decoration: BoxDecoration(
-                      color: const Color(0xFFFFF9F1).withValues(alpha: 0.92),
+                      color: const Color(0xFFFFF9F1).withValues(alpha: 0.90),
                       borderRadius: BorderRadius.circular(16),
                       border: Border.all(
                         color: const Color(0xFFD4AF37),
@@ -297,19 +297,20 @@ class _BoyfriendBirthdayCalendarHeroState
                 ),
               ),
 
-              // 4. Frosted Glassmorphic Calendar Card
+              // 4. Luminous Frosted Glassmorphic Calendar Card
               Padding(
-                padding: const EdgeInsets.fromLTRB(14, 48, 14, 20),
+                padding: const EdgeInsets.fromLTRB(14, 46, 14, 18),
                 child: Container(
                   padding: EdgeInsets.symmetric(
-                    horizontal: isMobile ? 12 : 20,
-                    vertical: isMobile ? 16 : 22,
+                    horizontal: isMobile ? 12 : 18,
+                    vertical: isMobile ? 14 : 18,
                   ),
                   decoration: BoxDecoration(
-                    color: const Color(0xFFFFFDF9).withValues(alpha: 0.88),
+                    // Translucent glass so the photo shines through softly
+                    color: const Color(0xFFFFFDF9).withValues(alpha: 0.58),
                     borderRadius: BorderRadius.circular(22),
                     border: Border.all(
-                      color: Colors.white.withValues(alpha: 0.90),
+                      color: Colors.white.withValues(alpha: 0.85),
                       width: 1.5,
                     ),
                     boxShadow: [
@@ -323,80 +324,130 @@ class _BoyfriendBirthdayCalendarHeroState
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
+                      // Badge
                       FittedBox(
                         fit: BoxFit.scaleDown,
                         child: Container(
                           padding: const EdgeInsets.symmetric(
-                              horizontal: 12, vertical: 4.5),
+                              horizontal: 12, vertical: 4),
                           decoration: BoxDecoration(
-                            color: const Color(0xFFFFF4EE),
+                            color: Colors.white.withValues(alpha: 0.85),
                             borderRadius: BorderRadius.circular(14),
                             border: Border.all(
-                              color: const Color(0xFFB69A68).withValues(alpha: 0.6),
+                              color: const Color(0xFFB69A68).withValues(alpha: 0.7),
                               width: 0.8,
                             ),
                           ),
                           child: Text(
                             "SINCE 2022 · OUR RELATIONSHIP CALENDAR",
                             textAlign: TextAlign.center,
-                            style: GoogleFonts.plusJakartaSans(
-                              fontSize: isMobile ? 9.5 : 11,
+                            style: GoogleFonts.cormorantGaramond(
+                              fontSize: isMobile ? 10.5 : 12,
                               fontWeight: FontWeight.w800,
-                              letterSpacing: 1.6,
+                              letterSpacing: 2.0,
                               color: const Color(0xFF722F37),
                             ),
                           ),
                         ),
                       ),
-                      const SizedBox(height: 10),
+                      const SizedBox(height: 8),
 
-                      // Month Navigation Row with Previous & Next Month Controls
+                      // Month Navigation Row with Antique Rose-Gold Gem Buttons
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          // Previous Month Button
-                          IconButton(
-                            onPressed: _previousMonth,
-                            icon: const Icon(Icons.chevron_left_rounded, size: 26),
-                            color: const Color(0xFF722F37),
-                            tooltip: "Previous Month",
-                            visualDensity: VisualDensity.compact,
+                          // Previous Month Gem Button
+                          Container(
+                            width: 32,
+                            height: 32,
+                            decoration: BoxDecoration(
+                              color: Colors.white.withValues(alpha: 0.85),
+                              shape: BoxShape.circle,
+                              border: Border.all(
+                                color: const Color(0xFFD4AF37).withValues(alpha: 0.7),
+                                width: 1.0,
+                              ),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: const Color(0xFF722F37).withValues(alpha: 0.10),
+                                  blurRadius: 4,
+                                ),
+                              ],
+                            ),
+                            child: IconButton(
+                              padding: EdgeInsets.zero,
+                              onPressed: _previousMonth,
+                              icon: const Icon(Icons.chevron_left_rounded, size: 22),
+                              color: const Color(0xFF722F37),
+                              tooltip: "Previous Month",
+                            ),
                           ),
 
-                          // Month & Year Heading
+                          // Month & Year Heading in Calligraphic Cursive
                           Expanded(
                             child: Column(
+                              mainAxisSize: MainAxisSize.min,
                               children: [
                                 Text(
                                   "~ ${_monthNames[_currentMonth - 1]} ~",
                                   textAlign: TextAlign.center,
                                   style: GoogleFonts.greatVibes(
-                                    fontSize: isMobile ? 36 : 44,
+                                    fontSize: isMobile ? 38 : 46,
                                     fontWeight: FontWeight.w400,
                                     color: const Color(0xFF380811),
+                                    shadows: [
+                                      Shadow(
+                                        color: Colors.white.withValues(alpha: 0.95),
+                                        blurRadius: 6,
+                                      ),
+                                    ],
                                   ),
                                 ),
                                 Text(
                                   "$_currentYear",
                                   textAlign: TextAlign.center,
                                   style: GoogleFonts.cormorantGaramond(
-                                    fontSize: isMobile ? 18 : 22,
+                                    fontSize: isMobile ? 16 : 19,
                                     fontWeight: FontWeight.w800,
-                                    letterSpacing: 2.4,
+                                    letterSpacing: 2.2,
                                     color: const Color(0xFF722F37),
+                                    shadows: [
+                                      Shadow(
+                                        color: Colors.white.withValues(alpha: 0.90),
+                                        blurRadius: 4,
+                                      ),
+                                    ],
                                   ),
                                 ),
                               ],
                             ),
                           ),
 
-                          // Next Month Button
-                          IconButton(
-                            onPressed: _nextMonth,
-                            icon: const Icon(Icons.chevron_right_rounded, size: 26),
-                            color: const Color(0xFF722F37),
-                            tooltip: "Next Month",
-                            visualDensity: VisualDensity.compact,
+                          // Next Month Gem Button
+                          Container(
+                            width: 32,
+                            height: 32,
+                            decoration: BoxDecoration(
+                              color: Colors.white.withValues(alpha: 0.85),
+                              shape: BoxShape.circle,
+                              border: Border.all(
+                                color: const Color(0xFFD4AF37).withValues(alpha: 0.7),
+                                width: 1.0,
+                              ),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: const Color(0xFF722F37).withValues(alpha: 0.10),
+                                  blurRadius: 4,
+                                ),
+                              ],
+                            ),
+                            child: IconButton(
+                              padding: EdgeInsets.zero,
+                              onPressed: _nextMonth,
+                              icon: const Icon(Icons.chevron_right_rounded, size: 22),
+                              color: const Color(0xFF722F37),
+                              tooltip: "Next Month",
+                            ),
                           ),
                         ],
                       ),
@@ -404,13 +455,13 @@ class _BoyfriendBirthdayCalendarHeroState
                       // Shortcut pill to jump back to Oct 2026 birthday if navigating away
                       if (!isBirthdayMonth)
                         Padding(
-                          padding: const EdgeInsets.only(top: 4, bottom: 6),
+                          padding: const EdgeInsets.only(top: 4, bottom: 4),
                           child: GestureDetector(
                             onTap: _jumpToBirthday,
                             child: Container(
                               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 3.5),
                               decoration: BoxDecoration(
-                                color: const Color(0xFFFFF4EE),
+                                color: const Color(0xFFFFF4EE).withValues(alpha: 0.92),
                                 borderRadius: BorderRadius.circular(12),
                                 border: Border.all(color: const Color(0xFFD7A6A1), width: 0.9),
                               ),
@@ -433,14 +484,14 @@ class _BoyfriendBirthdayCalendarHeroState
                           ),
                         ),
 
-                      const SizedBox(height: 10),
+                      const SizedBox(height: 6),
 
                       // 7-Column Calendar Grid
                       _buildSevenColumnGrid(isMobile),
 
-                      const SizedBox(height: 16),
+                      const SizedBox(height: 12),
 
-                      // Date-Specific Memory Details Card
+                      // Date-Specific Memory Details Card or Birthday Banner
                       _buildDateDetailsCard(isMobile),
                     ],
                   ),
@@ -475,16 +526,29 @@ class _BoyfriendBirthdayCalendarHeroState
     final firstDayOffset = firstDayWeekday % 7; // Sunday = 0
     final totalDays = DateTime(_currentYear, _currentMonth + 1, 0).day;
 
-    final cellTextStyle = GoogleFonts.cormorantGaramond(
-      fontSize: isMobile ? 18 : 22,
+    // Romantic handwritten numerals (Caveat) with luminous white shadow
+    final cellTextStyle = GoogleFonts.caveat(
+      fontSize: isMobile ? 22 : 26,
       fontWeight: FontWeight.w700,
-      color: const Color(0xFF282522),
+      color: const Color(0xFF1E1014),
+      shadows: [
+        Shadow(
+          color: Colors.white.withValues(alpha: 0.95),
+          blurRadius: 4,
+        ),
+      ],
     );
 
     final headerStyle = GoogleFonts.plusJakartaSans(
       fontSize: isMobile ? 10.5 : 12,
       fontWeight: FontWeight.w800,
       color: const Color(0xFF722F37),
+      shadows: [
+        Shadow(
+          color: Colors.white.withValues(alpha: 0.95),
+          blurRadius: 4,
+        ),
+      ],
     );
 
     // Calculate total rows needed (4 to 6 rows)
@@ -506,9 +570,13 @@ class _BoyfriendBirthdayCalendarHeroState
             }).toList(),
           ),
         ),
+        const SizedBox(height: 5),
+        Divider(
+          color: const Color(0xFFD4AF37).withValues(alpha: 0.6),
+          height: 1,
+          thickness: 0.8,
+        ),
         const SizedBox(height: 6),
-        const Divider(color: Color(0xFFE2C89A), height: 1, thickness: 0.8),
-        const SizedBox(height: 8),
 
         // Grid of dates
         GridView.builder(
@@ -517,7 +585,7 @@ class _BoyfriendBirthdayCalendarHeroState
           itemCount: totalCells,
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 7,
-            mainAxisSpacing: 6,
+            mainAxisSpacing: 5,
             crossAxisSpacing: 4,
             childAspectRatio: 1.0,
           ),
@@ -560,7 +628,7 @@ class _BoyfriendBirthdayCalendarHeroState
     );
   }
 
-  /// Special Oct 13 Birthday Cell with glowing romantic kiss
+  /// Special Oct 13 Birthday Cell with glowing romantic lipstick kiss 💋
   Widget _buildBirthdayCell(int dayNumber, bool isMobile) {
     return AnimatedBuilder(
       animation: _kissPulseController,
@@ -575,10 +643,10 @@ class _BoyfriendBirthdayCalendarHeroState
             children: [
               // Romantic Rose Lipstick Glow Halo
               Container(
-                width: isMobile ? 34 : 38,
-                height: isMobile ? 34 : 38,
+                width: isMobile ? 36 : 40,
+                height: isMobile ? 36 : 40,
                 decoration: BoxDecoration(
-                  color: const Color(0xFFFFE0E6).withValues(alpha: 0.90),
+                  color: const Color(0xFFFFE0E6).withValues(alpha: 0.92),
                   shape: BoxShape.circle,
                   border: Border.all(
                     color: const Color(0xFFFF2D55),
@@ -586,7 +654,7 @@ class _BoyfriendBirthdayCalendarHeroState
                   ),
                   boxShadow: [
                     BoxShadow(
-                      color: const Color(0xFFFF2D55).withValues(alpha: 0.40),
+                      color: const Color(0xFFFF2D55).withValues(alpha: 0.45),
                       blurRadius: 10,
                       spreadRadius: 1,
                     ),
@@ -595,25 +663,25 @@ class _BoyfriendBirthdayCalendarHeroState
                 child: Center(
                   child: Text(
                     '$dayNumber',
-                    style: GoogleFonts.cormorantGaramond(
+                    style: GoogleFonts.caveat(
                       color: const Color(0xFFC2185B),
                       fontWeight: FontWeight.w900,
-                      fontSize: isMobile ? 18 : 22,
+                      fontSize: isMobile ? 24 : 29,
                     ),
                   ),
                 ),
               ),
 
-              // Romantic Kiss Stamp 💋
+              // Iconic Romantic Kiss Stamp 💋
               Positioned(
-                top: -6,
+                top: -7,
                 right: -6,
                 child: Transform.rotate(
                   angle: -0.15,
                   child: const Text(
                     "💋",
                     style: TextStyle(
-                      fontSize: 14,
+                      fontSize: 16,
                       shadows: [
                         Shadow(
                           color: Color(0xFFFF4081),
@@ -640,13 +708,13 @@ class _BoyfriendBirthdayCalendarHeroState
     required bool isMobile,
   }) {
     return Container(
-      width: isMobile ? 32 : 36,
-      height: isMobile ? 32 : 36,
+      width: isMobile ? 33 : 37,
+      height: isMobile ? 33 : 37,
       decoration: BoxDecoration(
         color: isSelected
-            ? const Color(0xFF722F37) // Muted Burgundy when selected
+            ? const Color(0xFF722F37).withValues(alpha: 0.90) // Muted Burgundy when selected
             : hasMemory
-                ? const Color(0xFFFFF2EC) // Soft warm tint for memories
+                ? const Color(0xFFFFF0F3).withValues(alpha: 0.75) // Soft warm rose tint for memories
                 : Colors.transparent,
         shape: BoxShape.circle,
         border: isSelected
@@ -658,18 +726,16 @@ class _BoyfriendBirthdayCalendarHeroState
       child: Stack(
         alignment: Alignment.center,
         children: [
-          // Day number text
+          // Day number text in handwritten Caveat script
           Text(
             '$dayNumber',
             style: cellTextStyle.copyWith(
-              color: isSelected
-                  ? Colors.white
-                  : const Color(0xFF282522),
+              color: isSelected ? Colors.white : const Color(0xFF1E1014),
               fontWeight: isSelected ? FontWeight.w900 : FontWeight.w700,
             ),
           ),
 
-          // Delicate Antique Gold / Rose memory indicator dot below numeral
+          // Delicate Antique Gold memory indicator dot below numeral
           if (hasMemory && !isSelected)
             Positioned(
               bottom: 2.5,
@@ -687,15 +753,13 @@ class _BoyfriendBirthdayCalendarHeroState
     );
   }
 
-  /// Date-Specific Memory Details Panel
-  /// Adheres strictly to instructions:
-  /// "If a date contains an existing memory, show that actual memory when selected. If a date has no memory, do not invent one."
+  /// Date-Specific Memory Details Panel or Birthday Banner
   Widget _buildDateDetailsCard(bool isMobile) {
     if (_selectedDay == null) {
       return Container(
-        padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+        padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
         decoration: BoxDecoration(
-          color: const Color(0xFFFFF9F1),
+          color: Colors.white.withValues(alpha: 0.85),
           borderRadius: BorderRadius.circular(14),
           border: Border.all(color: const Color(0xFFE4C3AB), width: 0.8),
         ),
@@ -715,32 +779,34 @@ class _BoyfriendBirthdayCalendarHeroState
     final isOct13 = (_currentYear == 2026 && _currentMonth == 10 && day == widget.highlightDay);
     final memories = _getMemoriesForDate(_currentYear, _currentMonth, day);
 
-    // Case 1: Birthday Date (Oct 13)
+    // Case 1: Birthday Date (Oct 13) - Default & Highlight
     if (isOct13) {
       return GestureDetector(
         onTap: _triggerKissBurst,
         child: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+          width: double.infinity,
+          padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
           decoration: BoxDecoration(
-            color: const Color(0xFFFFF0F3),
+            color: const Color(0xFFFFF0F3).withValues(alpha: 0.92),
             borderRadius: BorderRadius.circular(16),
             border: Border.all(color: const Color(0xFFFF2D55), width: 1.2),
             boxShadow: [
               BoxShadow(
-                color: const Color(0xFFFF2D55).withValues(alpha: 0.12),
+                color: const Color(0xFFFF2D55).withValues(alpha: 0.15),
                 blurRadius: 10,
                 offset: const Offset(0, 3),
               ),
             ],
           ),
           child: Column(
+            mainAxisSize: MainAxisSize.min,
             children: [
               FittedBox(
                 fit: BoxFit.scaleDown,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text("💋", style: TextStyle(fontSize: 16)),
+                    const Text("💋", style: TextStyle(fontSize: 14)),
                     const SizedBox(width: 6),
                     Text(
                       "OCTOBER 13 · SELVAKUMAR'S 24TH BIRTHDAY",
@@ -752,13 +818,13 @@ class _BoyfriendBirthdayCalendarHeroState
                       ),
                     ),
                     const SizedBox(width: 6),
-                    const Text("🎂", style: TextStyle(fontSize: 16)),
+                    const Text("🎂", style: TextStyle(fontSize: 14)),
                   ],
                 ),
               ),
-              const SizedBox(height: 6),
+              const SizedBox(height: 4),
               Text(
-                "Celebrating 24 years of the most handsome, kind, and loving soul! Every day with you is my greatest gift. Tap here for birthday kisses! ♡",
+                "Celebrating 24 years of the sweetest soul! Tap for birthday kisses 💋",
                 textAlign: TextAlign.center,
                 style: GoogleFonts.cormorantGaramond(
                   fontSize: isMobile ? 14 : 16,
@@ -779,9 +845,10 @@ class _BoyfriendBirthdayCalendarHeroState
       final memoryIndex = StoryConfig.memories.indexOf(memory);
 
       return Container(
-        padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+        width: double.infinity,
+        padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
         decoration: BoxDecoration(
-          color: const Color(0xFFFFF9F1),
+          color: const Color(0xFFFFF9F1).withValues(alpha: 0.95),
           borderRadius: BorderRadius.circular(16),
           border: Border.all(color: const Color(0xFFB69A68), width: 1.2),
           boxShadow: [
@@ -793,6 +860,7 @@ class _BoyfriendBirthdayCalendarHeroState
           ],
         ),
         child: Column(
+          mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             // Memory Title & Category
@@ -801,12 +869,12 @@ class _BoyfriendBirthdayCalendarHeroState
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Icon(Icons.favorite_rounded, size: 14, color: Color(0xFFB69A68)),
+                  const Icon(Icons.favorite_rounded, size: 13, color: Color(0xFFB69A68)),
                   const SizedBox(width: 6),
                   Text(
                     memory.title,
                     style: GoogleFonts.plusJakartaSans(
-                      fontSize: isMobile ? 11 : 12.5,
+                      fontSize: isMobile ? 11 : 12,
                       fontWeight: FontWeight.w800,
                       color: const Color(0xFF722F37),
                     ),
@@ -831,25 +899,25 @@ class _BoyfriendBirthdayCalendarHeroState
                 ],
               ),
             ),
-            const SizedBox(height: 5),
+            const SizedBox(height: 4),
 
             // Date & Location
             Text(
               "${memory.date} · 📍 ${memory.location}",
               style: GoogleFonts.plusJakartaSans(
-                fontSize: isMobile ? 9.5 : 10.5,
+                fontSize: isMobile ? 9.5 : 10,
                 fontWeight: FontWeight.w600,
                 color: const Color(0xFF80604B),
               ),
             ),
-            const SizedBox(height: 6),
+            const SizedBox(height: 4),
 
             // Caption
             Text(
               "“${memory.caption}”",
               textAlign: TextAlign.center,
               style: GoogleFonts.cormorantGaramond(
-                fontSize: isMobile ? 14 : 16,
+                fontSize: isMobile ? 13.5 : 15,
                 fontStyle: FontStyle.italic,
                 fontWeight: FontWeight.w600,
                 color: const Color(0xFF282522),
@@ -857,7 +925,7 @@ class _BoyfriendBirthdayCalendarHeroState
             ),
 
             if (memory.handwrittenNote != null) ...[
-              const SizedBox(height: 4),
+              const SizedBox(height: 3),
               Text(
                 "~ ${memory.handwrittenNote} ~",
                 textAlign: TextAlign.center,
@@ -869,7 +937,7 @@ class _BoyfriendBirthdayCalendarHeroState
               ),
             ],
 
-            const SizedBox(height: 8),
+            const SizedBox(height: 6),
 
             // View Photo Action Button
             InkWell(
@@ -878,22 +946,22 @@ class _BoyfriendBirthdayCalendarHeroState
                   PhotoViewerDialog.show(context, StoryConfig.memories, memoryIndex);
                 }
               },
-              borderRadius: BorderRadius.circular(16),
+              borderRadius: BorderRadius.circular(14),
               child: Container(
-                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4.5),
+                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
                 decoration: BoxDecoration(
                   color: const Color(0xFF722F37),
-                  borderRadius: BorderRadius.circular(14),
+                  borderRadius: BorderRadius.circular(12),
                 ),
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    const Icon(Icons.photo_library_outlined, size: 12, color: Colors.white),
+                    const Icon(Icons.photo_library_outlined, size: 11, color: Colors.white),
                     const SizedBox(width: 5),
                     Text(
                       "VIEW PHOTO IN ARCHIVE",
                       style: GoogleFonts.plusJakartaSans(
-                        fontSize: 9.5,
+                        fontSize: 9,
                         fontWeight: FontWeight.w800,
                         letterSpacing: 0.8,
                         color: Colors.white,
@@ -908,35 +976,22 @@ class _BoyfriendBirthdayCalendarHeroState
       );
     }
 
-    // Case 3: Date has no recorded memory (DO NOT INVENT ONE)
+    // Case 3: Date has no recorded memory (Delicate romantic whisper)
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
       decoration: BoxDecoration(
-        color: const Color(0xFFFFF9F1),
-        borderRadius: BorderRadius.circular(14),
-        border: Border.all(color: const Color(0xFFE4C3AB), width: 0.8),
+        color: Colors.white.withValues(alpha: 0.85),
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: const Color(0xFFE4C3AB).withValues(alpha: 0.6), width: 0.8),
       ),
-      child: Column(
-        children: [
-          Text(
-            "${_monthNames[_currentMonth - 1]} $day, $_currentYear",
-            style: GoogleFonts.plusJakartaSans(
-              fontSize: isMobile ? 10.5 : 11.5,
-              fontWeight: FontWeight.w700,
-              color: const Color(0xFF722F37),
-            ),
-          ),
-          const SizedBox(height: 3),
-          Text(
-            "No recorded photo archive for this day, but every quiet moment with you is etched into my heart ♡",
-            textAlign: TextAlign.center,
-            style: GoogleFonts.cormorantGaramond(
-              fontSize: isMobile ? 13 : 15,
-              fontStyle: FontStyle.italic,
-              color: const Color(0xFF80604B),
-            ),
-          ),
-        ],
+      child: Text(
+        "${_monthNames[_currentMonth - 1]} $day · A quiet day of loving you forever ♡",
+        textAlign: TextAlign.center,
+        style: GoogleFonts.caveat(
+          fontSize: isMobile ? 14 : 16,
+          fontWeight: FontWeight.w600,
+          color: const Color(0xFF722F37),
+        ),
       ),
     );
   }
